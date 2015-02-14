@@ -5,18 +5,29 @@
     class Program
     {
         private const string availableChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        private static int moovesCount = 0;
+        private const int matrixDefaultSize = 4;
 
         private static void Main(string[] args)
         {
-            char[,] matrix = GenerateCardsMatrix(4);
+
+            char[,] matrix = GenerateCardsMatrix(matrixDefaultSize);
+
+            bool[,] openedCards = new bool[matrixDefaultSize, matrixDefaultSize];
 
             PrintCharMatrix(matrix);
+            PrintBoolMatrix(openedCards);
 
 
         }
 
         private static char[,] GenerateCardsMatrix(int size)
         {
+            if (size < 2 || 6 < size)
+            {
+                throw new ArgumentOutOfRangeException("Size is out of range!");
+            }
+
             int charsUsed = size * size / 2;
 
             string actualChars = availableChars.Substring(0, charsUsed) + availableChars.Substring(0, charsUsed);
@@ -60,6 +71,25 @@
                 for (int col = 0; col < cols; col++)
                 {
                     Console.Write("{0}", matrix[row, col] + " ");
+                }
+                Console.WriteLine();
+            }
+        }
+
+        private static void PrintBoolMatrix(bool[,] matrix)
+        {
+            for (int i = 0; i < matrix.GetLength(0); i++)
+            {
+                for (int j = 0; j < matrix.GetLength(1); j++)
+                {
+                    if (matrix[i, j] == false)
+                    {
+                        Console.Write("0 ");
+                    }
+                    else
+                    {
+                        Console.Write("1 ");
+                    }
                 }
                 Console.WriteLine();
             }
