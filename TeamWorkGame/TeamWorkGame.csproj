@@ -80,6 +80,13 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Levels\Level1.txt" />
+    <Content Include="Levels\Level2.txt" />
+    <Content Include="Levels\Level3.txt" />
+    <Content Include="Levels\Level4.txt" />
+    <Content Include="Levels\Level5.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
