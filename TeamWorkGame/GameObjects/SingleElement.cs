@@ -2,9 +2,9 @@
 {
     using System;
 
-    public class Brick
+    public class SingleElement
     {
-        public Brick(ConsoleColor color, char symbol)
+        public SingleElement(ConsoleColor color, char symbol)
         {
             this.Color = color;
             this.Symbol = symbol;

@@ -6,7 +6,7 @@
     //{
     //    bool CanCollideWith(string objectType);
 
-    //    List<MatrixCoords> GetCollisionProfile();
+    //    List<Position> GetCollisionProfile();
 
     //    void RespondToCollision(CollisionData collisionData);
 

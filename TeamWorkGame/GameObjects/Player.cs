@@ -3,9 +3,9 @@
     using TeamWorkGame.Data;
     using TeamWorkGame.Interfaces;
 
-    public class Hero : IMovable
+    public class Player : IMovable
     {
-        public Hero(string name, int level)
+        public Player(string name, int level)
         {
             this.Name = name;
             this.Level = level;

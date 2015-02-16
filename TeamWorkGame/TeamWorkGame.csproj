@@ -59,11 +59,12 @@
   <ItemGroup>
     <Compile Include="Data\ConsoleRenderer.cs" />
     <Compile Include="Data\Direction.cs" />
+    <Compile Include="Data\KeyboardInterface.cs" />
     <Compile Include="Data\LevelLoader.cs" />
-    <Compile Include="Data\VisualElement.cs" />
+    <Compile Include="GameObjects\VisualElement.cs" />
     <Compile Include="GameObjects\Box.cs" />
-    <Compile Include="GameObjects\Brick.cs" />
-    <Compile Include="GameObjects\Hero.cs" />
+    <Compile Include="GameObjects\SingleElement.cs" />
+    <Compile Include="GameObjects\Player.cs" />
     <Compile Include="Interfaces\ICollidable.cs" />
     <Compile Include="Interfaces\IMovable.cs" />
     <Compile Include="Interfaces\IRenderable.cs" />
