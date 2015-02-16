@@ -57,7 +57,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="Data\ConsoleRenderer.cs" />
+    <Compile Include="Data\LevelLoader.cs" />
+    <Compile Include="GameObjects\Box.cs" />
+    <Compile Include="GameObjects\Brick.cs" />
+    <Compile Include="GameObjects\Hero.cs" />
+    <Compile Include="Interfaces\ICollidable.cs" />
+    <Compile Include="Interfaces\IRenderable.cs" />
+    <Compile Include="Interfaces\IRenderer.cs" />
+    <Compile Include="Interfaces\IUserInterface.cs" />
+    <Compile Include="Data\MatrixCoords.cs" />
+    <Compile Include="MainMenu.cs" />
+    <Compile Include="Start.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -81,11 +92,14 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Levels\Level1.txt" />
-    <Content Include="Levels\Level2.txt" />
-    <Content Include="Levels\Level3.txt" />
-    <Content Include="Levels\Level4.txt" />
-    <Content Include="Levels\Level5.txt" />
+    <Content Include="Data\Levels\Level1.txt" />
+    <Content Include="Data\Levels\Level2.txt" />
+    <Content Include="Data\Levels\Level3.txt" />
+    <Content Include="Data\Levels\Level4.txt" />
+    <Content Include="Data\Levels\Level5.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Data\Save\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
