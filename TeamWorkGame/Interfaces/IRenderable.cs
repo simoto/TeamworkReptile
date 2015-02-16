@@ -4,7 +4,7 @@
     
     public interface IRenderable
     {
-        MatrixCoords GetTopLeft();
+        Position GetTopLeft();
 
         char[,] GetImage();
     }

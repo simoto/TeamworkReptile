@@ -58,15 +58,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\ConsoleRenderer.cs" />
+    <Compile Include="Data\Direction.cs" />
     <Compile Include="Data\LevelLoader.cs" />
     <Compile Include="GameObjects\Box.cs" />
     <Compile Include="GameObjects\Brick.cs" />
     <Compile Include="GameObjects\Hero.cs" />
     <Compile Include="Interfaces\ICollidable.cs" />
+    <Compile Include="Interfaces\IMovable.cs" />
     <Compile Include="Interfaces\IRenderable.cs" />
     <Compile Include="Interfaces\IRenderer.cs" />
     <Compile Include="Interfaces\IUserInterface.cs" />
-    <Compile Include="Data\MatrixCoords.cs" />
+    <Compile Include="Data\Position.cs" />
     <Compile Include="MainMenu.cs" />
     <Compile Include="Start.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

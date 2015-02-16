@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TeamWorkGame
 {
-    class MainMenu
+    static class MainMenu
     {
         //TODO: Main game menu to choose start game, load game and exit
     }
