@@ -2,7 +2,7 @@
 {
     using System;
 
-    class Brick
+    public class Brick
     {
         public Brick(ConsoleColor color, char symbol)
         {

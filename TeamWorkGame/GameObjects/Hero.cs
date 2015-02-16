@@ -3,7 +3,7 @@
     using TeamWorkGame.Data;
     using TeamWorkGame.Interfaces;
 
-    class Hero : IMovable
+    public class Hero : IMovable
     {
         public Hero(string name, int level)
         {

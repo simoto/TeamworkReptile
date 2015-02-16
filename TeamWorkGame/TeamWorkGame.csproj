@@ -60,6 +60,7 @@
     <Compile Include="Data\ConsoleRenderer.cs" />
     <Compile Include="Data\Direction.cs" />
     <Compile Include="Data\LevelLoader.cs" />
+    <Compile Include="Data\VisualElement.cs" />
     <Compile Include="GameObjects\Box.cs" />
     <Compile Include="GameObjects\Brick.cs" />
     <Compile Include="GameObjects\Hero.cs" />

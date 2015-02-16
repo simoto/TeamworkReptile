@@ -1,11 +1,15 @@
 ﻿namespace TeamWorkGame.Interfaces
 {
+    using System;
+    using TeamWorkGame.Data;
+    using TeamWorkGame.GameObjects;
+
     public interface IRenderer
     {
-        void EnqueueForRendering(IRenderable obj);
+        void RenderHero(Hero hero);
 
-        void RenderAll();
+        void RenderMap(VisualElement[,] matrix);
 
-        void ClearQueue();
+        void RenderString(string stringToWrite, ConsoleColor background, int row, int col);
     }
 }

@@ -1,13 +1,62 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TeamWorkGame.Data
+﻿namespace TeamWorkGame.Data
 {
-    class ConsoleRenderer
+    using System;
+    using TeamWorkGame.GameObjects;
+    using TeamWorkGame.Interfaces;
+
+    class ConsoleRenderer : IRenderer
     {
-        //TODO: This must draw chars to the console
+        private void RenderBrick(Brick brick, int row, int col)
+        {
+            Console.SetCursorPosition(col, row);
+            Console.BackgroundColor = brick.Color;
+            Console.Write(brick.Symbol);
+        }
+
+        private void RenderVisualElementInConsole(VisualElement element, int row, int col)
+        {
+            for (int r = 0; r < element.BrickMatrix.GetLength(0); r++)
+            {
+                for (int c = 0; c < element.BrickMatrix.GetLength(1); c++)
+                {
+                    RenderBrick(element.BrickMatrix[r, c], row + r, col + c);
+                }
+            }
+        }
+
+        public void RenderHero(Hero hero)
+        {
+            Console.SetCursorPosition(hero.Position.Col, hero.Position.Row);
+            Console.BackgroundColor = ConsoleColor.DarkRed;
+            Console.Write('H');
+        }
+
+        public void RenderMap(VisualElement[,] matrix)
+        {
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.Clear();
+
+            int currentRow = 0, currentCol = 0;
+            int stepsPerRow = matrix[0, 0].BrickMatrix.GetLength(0);
+            int stepsPerCol = matrix[0, 0].BrickMatrix.GetLength(1);
+
+            for (int r = 0; r < matrix.GetLength(0); r++)
+            {
+                for (int c = 0; c < matrix.GetLength(1); c++)
+                {
+                    RenderVisualElementInConsole(matrix[r, c], currentRow, currentCol);
+                    currentCol += stepsPerCol;
+                }
+                currentRow += stepsPerRow;
+                currentCol = 0;
+            }
+        }
+
+        public void RenderString(string stringToWrite, ConsoleColor background, int row, int col)
+        {
+            Console.SetCursorPosition(col, row);
+            Console.BackgroundColor = background;
+            Console.Write(stringToWrite);
+        }
     }
 }
