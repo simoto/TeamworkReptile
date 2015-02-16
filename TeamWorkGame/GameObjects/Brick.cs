@@ -1,13 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TeamWorkGame.GameObjects
+﻿namespace TeamWorkGame.GameObjects
 {
+    using System;
+
     class Brick
     {
-        //TODO: Must be implemented
+        public Brick(ConsoleColor color, char symbol)
+        {
+            this.Color = color;
+            this.Symbol = symbol;
+        }
+
+        public ConsoleColor Color { get; set; }
+
+        public char Symbol { get; set; }
     }
 }
