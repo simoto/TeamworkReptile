@@ -1,35 +1,40 @@
 ﻿namespace TeamWorkGame.Data
 {
     using System;
-    using System.Collections.Generic;
     using System.IO;
-    using System.Linq;
     using System.Text;
-    using System.Threading.Tasks;
 
-    class LevelLoader
+    public class LevelLoader
     {
-        //TODO: This class must read the .txt map and fill matrix with it
-        public static string[] LoadFile(string fileName)
+        const string filePath = @"../../Data/Levels/Level";
+
+        public static char[,] LoadLevel(int level)
         {
-            if (String.IsNullOrWhiteSpace(fileName))
-                throw new ArgumentException("Valid filename must be provided!");
+            if (level <= 0)
+            {
+                throw new ArgumentException("Valid level must be provided!");
+            }
 
-            List<string> fileData = new List<string>(50);
+            char[,] currentLevel = new char[10, 10];
             string line;
-
+            int lineCount = 0;
             StreamReader reader = null;
 
             try
             {
-                reader = new StreamReader(fileName, Encoding.Unicode);
+                reader = new StreamReader(filePath + level + ".txt", Encoding.Unicode);
                 while ((line = reader.ReadLine()) != null)
                 {
-                    fileData.Add(line);
+                    for (int i = 0; i < 10; i++)
+                    {
+                        currentLevel[lineCount, i] = line[i];
+                    }
+
+                    lineCount++;
                 }
             }
 
-            catch (System.IO.IOException ex)
+            catch (IOException ex)
             {
                 throw new Exception("Error: Could not read file from disk. Original error: " + ex.Message);
             }
@@ -40,7 +45,7 @@
                     reader.Close();
             }
 
-            return fileData.ToArray();
+            return currentLevel;
         }
     }
 }
