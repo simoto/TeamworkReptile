@@ -10,9 +10,9 @@
 
         public char[,] LoadLevel(int level)
         {
-            if (level <= 0)
+            if (level <= 0 || 6 <= level)
             {
-                throw new ArgumentException("Valid level must be provided!");
+                throw new ArgumentOutOfRangeException("Valid level must be provided! Available levels 1-5.");
             }
 
             char[,] currentLevel = new char[10, 10];
@@ -34,15 +34,21 @@
                 }
             }
 
-            catch (IOException ex)
+            catch (FileNotFoundException ex)
             {
-                throw new Exception("Error: Could not read file from disk. Original error: " + ex.Message);
+                throw new FileNotFoundException("Error: Could not read file from disk. Original error: " + ex.Message);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error: Something went wrong. Original error: " + ex.Message);
             }
 
             finally
             {
                 if (reader != null)
+                {
                     reader.Close();
+                }
             }
 
             return currentLevel;
