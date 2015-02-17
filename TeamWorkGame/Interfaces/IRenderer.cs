@@ -6,7 +6,7 @@
 
     public interface IRenderer
     {
-        void RenderHero(Player hero);
+        void RenderPlayer(Player hero);
 
         void RenderMap(char[,] matrix);
 

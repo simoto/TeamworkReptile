@@ -9,6 +9,7 @@
         {
             this.Name = name;
             this.Level = level;
+            this.Position = new Position(0, 0);
         }
 
         public string Name { get; set; }

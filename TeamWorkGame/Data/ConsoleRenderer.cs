@@ -17,7 +17,7 @@
             RenderBrick(element, row, col);
         }
 
-        public void RenderHero(Player hero)
+        public void RenderPlayer(Player hero)
         {
             Console.SetCursorPosition(hero.Position.Col, hero.Position.Row);
             Console.BackgroundColor = ConsoleColor.DarkRed;
