@@ -6,9 +6,16 @@
 
     public class ConsoleRenderer : IRenderer
     {
+        private const ConsoleColor Player_BackgroundColor = ConsoleColor.DarkRed;
+        private const ConsoleColor Player_Color = ConsoleColor.White;
+        private const ConsoleColor Brick_Color = ConsoleColor.DarkGray;
+        private const ConsoleColor Background_Color = ConsoleColor.Black;
+        private const char Symbol_Of_Player = 'H';
+
         private void RenderBrick(char brick, int row, int col)
         {
             Console.SetCursorPosition(row, col);
+            Console.ForegroundColor = Brick_Color;
             Console.Write(brick);
         }
 
@@ -20,29 +27,30 @@
         public void RenderPlayer(Player hero)
         {
             Console.SetCursorPosition(hero.Position.Col, hero.Position.Row);
-            Console.BackgroundColor = ConsoleColor.DarkRed;
-            Console.Write('H');
+            Console.ForegroundColor = Player_Color;
+            Console.BackgroundColor = Player_BackgroundColor;
+            Console.Write(Symbol_Of_Player);
         }
 
         public void RenderMap(char[,] matrix)
         {
-            Console.BackgroundColor = ConsoleColor.Black;
+            Console.BackgroundColor = Background_Color;
             Console.Clear();
 
-            for (int r = 0; r < matrix.GetLength(0); r++)
+            for (int row = 0; row < matrix.GetLength(0); row++)
             {
-                for (int c = 0; c < matrix.GetLength(1); c++)
+                for (int col = 0; col < matrix.GetLength(1); col++)
                 {
-                    RenderVisualElementInConsole(matrix[r, c], r, c);
+                    RenderVisualElementInConsole(matrix[row, col], row, col);
                 }
 
             }
         }
 
-        public void RenderString(string stringToWrite, ConsoleColor background, int row, int col)
+        public void RenderString(string stringToWrite, ConsoleColor backgroundColor, int row, int col)
         {
             Console.SetCursorPosition(col, row);
-            Console.BackgroundColor = background;
+            Console.BackgroundColor = backgroundColor;
             Console.Write(stringToWrite);
         }
     }
