@@ -8,7 +8,7 @@
     {
         void RenderHero(Player hero);
 
-        void RenderMap(VisualElement[,] matrix);
+        void RenderMap(char[,] matrix);
 
         void RenderString(string stringToWrite, ConsoleColor background, int row, int col);
     }

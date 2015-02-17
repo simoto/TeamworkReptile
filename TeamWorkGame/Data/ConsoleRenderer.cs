@@ -4,24 +4,17 @@
     using TeamWorkGame.GameObjects;
     using TeamWorkGame.Interfaces;
 
-    class ConsoleRenderer : IRenderer
+    public class ConsoleRenderer : IRenderer
     {
-        private void RenderBrick(SingleElement brick, int row, int col)
+        private void RenderBrick(char brick, int row, int col)
         {
-            Console.SetCursorPosition(col, row);
-            Console.BackgroundColor = brick.Color;
-            Console.Write(brick.Symbol);
+            Console.SetCursorPosition(row, col);
+            Console.Write(brick);
         }
 
-        private void RenderVisualElementInConsole(VisualElement element, int row, int col)
+        private void RenderVisualElementInConsole(char element, int row, int col)
         {
-            for (int r = 0; r < element.ElementMatrix.GetLength(0); r++)
-            {
-                for (int c = 0; c < element.ElementMatrix.GetLength(1); c++)
-                {
-                    RenderBrick(element.ElementMatrix[r, c], row + r, col + c);
-                }
-            }
+            RenderBrick(element, row, col);
         }
 
         public void RenderHero(Player hero)
@@ -31,24 +24,18 @@
             Console.Write('H');
         }
 
-        public void RenderMap(VisualElement[,] matrix)
+        public void RenderMap(char[,] matrix)
         {
             Console.BackgroundColor = ConsoleColor.Black;
             Console.Clear();
-
-            int currentRow = 0, currentCol = 0;
-            int stepsPerRow = matrix[0, 0].ElementMatrix.GetLength(0);
-            int stepsPerCol = matrix[0, 0].ElementMatrix.GetLength(1);
 
             for (int r = 0; r < matrix.GetLength(0); r++)
             {
                 for (int c = 0; c < matrix.GetLength(1); c++)
                 {
-                    RenderVisualElementInConsole(matrix[r, c], currentRow, currentCol);
-                    currentCol += stepsPerCol;
+                    RenderVisualElementInConsole(matrix[r, c], r, c);
                 }
-                currentRow += stepsPerRow;
-                currentCol = 0;
+
             }
         }
 
