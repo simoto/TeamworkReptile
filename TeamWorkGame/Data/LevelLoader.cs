@@ -8,7 +8,7 @@
     {
         const string filePath = @"../../Data/Levels/Level";
 
-        public static char[,] LoadLevel(int level)
+        public char[,] LoadLevel(int level)
         {
             if (level <= 0)
             {
@@ -22,7 +22,7 @@
 
             try
             {
-                reader = new StreamReader(filePath + level + ".txt", Encoding.Unicode);
+                reader = new StreamReader(filePath + level + ".txt");
                 while ((line = reader.ReadLine()) != null)
                 {
                     for (int i = 0; i < 10; i++)
