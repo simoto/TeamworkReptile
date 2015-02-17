@@ -6,16 +6,18 @@
 
     public class LevelLoader
     {
-        const string filePath = @"../../Data/Levels/Level";
+        private const string filePath = @"../../Data/Levels/Level";
+        private const int Matrix_Size = 10;
+        private const int Max_Level = 5;
 
         public char[,] LoadLevel(int level)
         {
-            if (level <= 0 || 6 <= level)
+            if (level <= 0 || Max_Level < level)
             {
-                throw new ArgumentOutOfRangeException("Valid level must be provided! Available levels 1-5.");
+                throw new ArgumentOutOfRangeException(string.Format("Valid level must be provided! Available levels 1-{0}.", Max_Level));
             }
 
-            char[,] currentLevel = new char[10, 10];
+            char[,] currentLevel = new char[Matrix_Size, Matrix_Size];
             string line;
             int lineCount = 0;
             StreamReader reader = null;
@@ -25,7 +27,7 @@
                 reader = new StreamReader(filePath + level + ".txt");
                 while ((line = reader.ReadLine()) != null)
                 {
-                    for (int i = 0; i < 10; i++)
+                    for (int i = 0; i < Matrix_Size; i++)
                     {
                         currentLevel[lineCount, i] = line[i];
                     }
