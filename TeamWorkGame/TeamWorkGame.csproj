@@ -101,6 +101,7 @@
     <Content Include="Data\Levels\Level3.txt" />
     <Content Include="Data\Levels\Level4.txt" />
     <Content Include="Data\Levels\Level5.txt" />
+    <Content Include="Data\Ranking\top10.txt" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\Save\" />

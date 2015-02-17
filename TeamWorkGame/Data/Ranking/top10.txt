@@ -1,0 +1,10 @@
+John 5 50
+Mark 5 60
+Tom 4 40
+Simon 4 42
+Samuel 3 50
+Snow 3 66
+Brandon 3 67
+Sansa 3 68
+Pesho 2 30
+Gosho 2 40
