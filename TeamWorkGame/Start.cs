@@ -7,7 +7,9 @@
 
     class Start
     {
-        static int height = 50, width = 50;
+        const int Height = 20;
+        const int Width = 50;
+        const string Title = "ReptileMovingBox";
         static LevelLoader levelLoader;
         static IRenderer renderer;
         static Player player;
@@ -15,9 +17,9 @@
 
         static void Main()
         {
-            Console.Title = "ReptileMovingBox";
-            Console.WindowHeight = height;
-            Console.WindowWidth = width;
+            Console.Title = Title;
+            Console.WindowHeight = Height;
+            Console.WindowWidth = Width;
             ui = new KeyboardInterface();
 
             //TODO: Here is the start point of the game
