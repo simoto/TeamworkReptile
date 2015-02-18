@@ -63,7 +63,6 @@
     <Compile Include="Data\LevelLoader.cs" />
     <Compile Include="Data\RankingLoader.cs" />
     <Compile Include="Data\RankingSaver.cs" />
-    <Compile Include="Data\RankingSorter.cs" />
     <Compile Include="GameObjects\Participant.cs" />
     <Compile Include="GameObjects\VisualElement.cs" />
     <Compile Include="GameObjects\Box.cs" />
@@ -73,7 +72,6 @@
     <Compile Include="Interfaces\IMovable.cs" />
     <Compile Include="Interfaces\IRenderable.cs" />
     <Compile Include="Interfaces\IRenderer.cs" />
-    <Compile Include="Interfaces\ISort.cs" />
     <Compile Include="Interfaces\IUserInterface.cs" />
     <Compile Include="Data\Position.cs" />
     <Compile Include="MainMenu.cs" />
