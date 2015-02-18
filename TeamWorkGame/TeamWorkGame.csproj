@@ -63,7 +63,9 @@
     <Compile Include="Data\LevelLoader.cs" />
     <Compile Include="Data\RankingLoader.cs" />
     <Compile Include="Data\RankingSaver.cs" />
+    <Compile Include="Data\SaveManager.cs" />
     <Compile Include="GameObjects\Participant.cs" />
+    <Compile Include="GameObjects\Save.cs" />
     <Compile Include="GameObjects\VisualElement.cs" />
     <Compile Include="GameObjects\Box.cs" />
     <Compile Include="GameObjects\SingleElement.cs" />
@@ -107,7 +109,7 @@
     <Content Include="Data\Ranking\top10.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Data\Save\" />
+    <Folder Include="Data\Saves\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
