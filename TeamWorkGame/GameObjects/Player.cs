@@ -5,20 +5,27 @@
 
     public class Player : IMovable
     {
-        public Player(string name, int level)
+        public Player()
+        {
+        }
+
+        public Player(string name, int level, string password)
         {
             this.Name = name;
+            this.Password = password;
             this.Level = level;
             this.Position = new Position(0, 0);
         }
 
         public string Name { get; set; }
 
+        public string Password { get; set; }
+
         public Position Position { get; set; }
 
         public int Level { get; set; }
 
-        public int Score { get; set; }
+        public int Moves { get; set; }
 
         public void Move(Direction direction)
         {

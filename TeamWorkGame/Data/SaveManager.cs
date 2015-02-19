@@ -64,24 +64,24 @@
             return save;
         }
 
-        public static void Save(Save save, string name, string password)
+        public static void Save(char[,] matrix, Player player)
         {
-            if (save == null)
+            if (matrix == null)
             {
-                throw new ArgumentNullException("Save is null!");
+                throw new ArgumentNullException("Matrix is null!");
             }
 
-            if (name == string.Empty || Name_Max_Length < name.Length)
+            if (player.Name == string.Empty || Name_Max_Length < player.Name.Length)
             {
                 throw new ArgumentOutOfRangeException("Invalid name!");
             }
 
-            if (password == string.Empty || Password_Max_Length < password.Length)
+            if (player.Password == string.Empty || Password_Max_Length < player.Password.Length)
             {
                 throw new ArgumentOutOfRangeException("Invalid password!");
             }
 
-            using (StreamWriter sw = new StreamWriter(filePath + name + "&" + password + ".txt"))
+            using (StreamWriter sw = new StreamWriter(filePath + player.Name + "&" + player.Password + ".txt"))
             {
                 StringBuilder sb = new StringBuilder(Matrix_Size);
 
@@ -89,15 +89,15 @@
                 {
                     for (int col = 0; col < Matrix_Size; col++)
                     {
-                        sb.Append(save.Matrix[row, col]);
+                        sb.Append(matrix[row, col]);
                     }
 
                     sw.WriteLine(sb.ToString());
                     sb.Clear();
                 }
 
-                sw.WriteLine(save.Level);
-                sw.WriteLine(save.Moves);
+                sw.WriteLine(player.Level);
+                sw.WriteLine(player.Moves);
             }
         }
     }

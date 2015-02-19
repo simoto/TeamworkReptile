@@ -12,7 +12,7 @@
         const string Title = "ReptileMovingBox";
         static LevelLoader levelLoader;
         static IRenderer renderer;
-        static Player player;
+        public static Player player;
         static IUserInterface ui;
 
         static void Main()
@@ -25,8 +25,8 @@
             //TODO: Here is the start point of the game
 
             //TODO: MainMenu must be here with user choose
-            player = new Player("Test", 1);
-
+            player = new Player("Test", 1, "somePass");
+            
             //TODO: MapLoader loads the current map with current user
             levelLoader = new LevelLoader();
             char[,] currentMap = levelLoader.LoadLevel(1);
@@ -35,7 +35,6 @@
             renderer = new ConsoleRenderer();
             renderer.RenderMap(currentMap);
             
-
             //TODO: Here will be the game loop, KeyboardInterface usage
             while (true)
             {
@@ -43,7 +42,7 @@
                 Console.SetCursorPosition(40, 0);
                 ConsoleKeyInfo pressedKey = Console.ReadKey();
 
-                ui.ProcessInput(pressedKey);
+                ui.ProcessInput(pressedKey, player, currentMap);
             }
         }
     }

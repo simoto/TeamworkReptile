@@ -1,14 +1,17 @@
 ﻿namespace TeamWorkGame.Data
 {
     using System;
+    using System.Media;
+    using TeamWorkGame.GameObjects;
     using TeamWorkGame.Interfaces;
 
-    public class KeyboardInterface: IUserInterface
+    public class KeyboardInterface : IUserInterface
     {
-        public void ProcessInput(ConsoleKeyInfo key)
+        public void ProcessInput(ConsoleKeyInfo key, Player player, char[,] matrix)
         {
             if (key.Key == ConsoleKey.LeftArrow)
             {
+                SystemSounds.Beep.Play();
                 throw new NotImplementedException();
             }
             else if (key.Key == ConsoleKey.RightArrow)
@@ -25,8 +28,12 @@
             }
             else if (key.Key == ConsoleKey.S)
             {
-                // save and exit
-                throw new NotImplementedException();
+                // TODO ask player for pass/key
+                var password = "TODO";
+
+                SaveManager.Save(matrix, player);
+                SystemSounds.Asterisk.Play();
+                Environment.Exit(0);
             }
             else if (key.Key == ConsoleKey.L)
             {
@@ -38,7 +45,7 @@
                 // restart, start from same level
                 throw new NotImplementedException();
             }
-            else if (key.Key == ConsoleKey.E)
+            else if (key.Key == ConsoleKey.N)
             {
                 // end game, start from level 1
                 throw new NotImplementedException();

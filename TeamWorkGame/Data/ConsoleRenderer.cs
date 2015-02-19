@@ -45,6 +45,8 @@
                 }
 
             }
+
+            RenderMenu();
         }
 
         public void RenderString(string stringToWrite, ConsoleColor backgroundColor, int row, int col)
@@ -52,6 +54,21 @@
             Console.SetCursorPosition(col, row);
             Console.BackgroundColor = backgroundColor;
             Console.Write(stringToWrite);
+        }
+
+        private void RenderMenu()
+        {
+            Console.SetCursorPosition(20, 3);
+            Console.WriteLine("S => Save and exit.");
+
+            Console.SetCursorPosition(20, 5);
+            Console.WriteLine("L => Load previuos game.");
+
+            Console.SetCursorPosition(20, 7);
+            Console.WriteLine("R => Restart level.");
+
+            Console.SetCursorPosition(20, 9);
+            Console.WriteLine("N => Start new game.");
         }
     }
 }
