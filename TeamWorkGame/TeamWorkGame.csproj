@@ -107,10 +107,9 @@
     <Content Include="Data\Levels\Level4.txt" />
     <Content Include="Data\Levels\Level5.txt" />
     <Content Include="Data\Ranking\top10.txt" />
+    <Content Include="Data\Saves\ivan&amp;123.txt" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Data\Saves\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
