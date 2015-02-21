@@ -7,26 +7,45 @@
 
     public class KeyboardInterface : IUserInterface
     {
-        public void ProcessInput(ConsoleKeyInfo key, Player player, char[,] matrix)
+        public void ProcessInput(ConsoleKeyInfo pressedKey, Player player, SingleElement[,] matrix, IRenderer renderer)
         {
-            if (key.Key == ConsoleKey.LeftArrow)
+            if (pressedKey.Key.Equals(ConsoleKey.LeftArrow))
             {
-                SystemSounds.Beep.Play();
-                throw new NotImplementedException();
+                if (!matrix[player.Position.Row, player.Position.Col - 1].IsSolid)
+                {
+                    renderer.RenderBrick(matrix[player.Position.Row, player.Position.Col], player.Position.Row, player.Position.Col);
+                    player.Move(Direction.Left);
+                    player.Moves++;
+                }
             }
-            else if (key.Key == ConsoleKey.RightArrow)
+            else if (pressedKey.Key.Equals(ConsoleKey.RightArrow))
             {
-                throw new NotImplementedException();
+                if (!matrix[player.Position.Row, player.Position.Col + 1].IsSolid)
+                {
+                    renderer.RenderBrick(matrix[player.Position.Row, player.Position.Col], player.Position.Row, player.Position.Col);
+                    player.Move(Direction.Right);
+                    player.Moves++;
+                }
             }
-            else if (key.Key == ConsoleKey.UpArrow)
+            else if (pressedKey.Key.Equals(ConsoleKey.UpArrow))
             {
-                throw new NotImplementedException();
+                if (!matrix[player.Position.Row - 1, player.Position.Col].IsSolid)
+                {
+                    renderer.RenderBrick(matrix[player.Position.Row, player.Position.Col], player.Position.Row, player.Position.Col);
+                    player.Move(Direction.Up);
+                    player.Moves++;
+                }
             }
-            else if (key.Key == ConsoleKey.DownArrow)
+            else if (pressedKey.Key.Equals(ConsoleKey.DownArrow))
             {
-                throw new NotImplementedException();
+                if (!matrix[player.Position.Row + 1, player.Position.Col].IsSolid)
+                {
+                    renderer.RenderBrick(matrix[player.Position.Row, player.Position.Col], player.Position.Row, player.Position.Col);
+                    player.Move(Direction.Down);
+                    player.Moves++;
+                }
             }
-            else if (key.Key == ConsoleKey.S)
+            else if (pressedKey.Key == ConsoleKey.S)
             {
                 // TODO ask player for pass/key
                 var password = "TODO";
@@ -35,17 +54,17 @@
                 SystemSounds.Asterisk.Play();
                 Environment.Exit(0);
             }
-            else if (key.Key == ConsoleKey.L)
+            else if (pressedKey.Key == ConsoleKey.L)
             {
                 //load
                 throw new NotImplementedException();
             }
-            else if (key.Key == ConsoleKey.R)
+            else if (pressedKey.Key == ConsoleKey.R)
             {
                 // restart, start from same level
                 throw new NotImplementedException();
             }
-            else if (key.Key == ConsoleKey.N)
+            else if (pressedKey.Key == ConsoleKey.N)
             {
                 // end game, start from level 1
                 throw new NotImplementedException();

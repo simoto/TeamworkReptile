@@ -32,16 +32,16 @@
             switch (direction)
             {
                 case Direction.Up:
-                    this.Position.Row += -1;
+                    this.Position.Row--;
                     break;
                 case Direction.Down:
-                    this.Position.Row += 1;
+                    this.Position.Row++;
                     break;
                 case Direction.Left:
-                    this.Position.Col += -1;
+                    this.Position.Col--;
                     break;
                 case Direction.Right:
-                    this.Position.Col += 1;
+                    this.Position.Col++;
                     break;
                 default:
                     break;

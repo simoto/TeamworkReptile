@@ -12,16 +12,11 @@
         private const ConsoleColor Background_Color = ConsoleColor.Black;
         private const char Symbol_Of_Player = 'H';
 
-        private void RenderBrick(char brick, int row, int col)
+        public void RenderBrick(SingleElement brick, int row, int col)
         {
-            Console.SetCursorPosition(row, col);
-            Console.ForegroundColor = Brick_Color;
-            Console.Write(brick);
-        }
-
-        private void RenderVisualElementInConsole(char element, int row, int col)
-        {
-            RenderBrick(element, row, col);
+            Console.SetCursorPosition(col, row);
+            Console.ForegroundColor = brick.Color;
+            Console.Write(brick.Symbol);
         }
 
         public void RenderPlayer(Player hero)
@@ -32,7 +27,7 @@
             Console.Write(Symbol_Of_Player);
         }
 
-        public void RenderMap(char[,] matrix)
+        public void RenderMap(SingleElement[,] matrix)
         {
             Console.BackgroundColor = Background_Color;
             Console.Clear();
@@ -41,7 +36,7 @@
             {
                 for (int col = 0; col < matrix.GetLength(1); col++)
                 {
-                    RenderVisualElementInConsole(matrix[row, col], row, col);
+                    RenderBrick(matrix[row, col], row, col);
                 }
 
             }

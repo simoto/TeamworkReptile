@@ -8,8 +8,10 @@
     {
         void RenderPlayer(Player hero);
 
-        void RenderMap(char[,] matrix);
+        void RenderMap(SingleElement[,] matrix);
 
         void RenderString(string stringToWrite, ConsoleColor background, int row, int col);
+
+        void RenderBrick(SingleElement element, int row, int col);
     }
 }

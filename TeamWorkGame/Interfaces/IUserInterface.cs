@@ -5,6 +5,6 @@
 
     public interface IUserInterface
     {
-        void ProcessInput(ConsoleKeyInfo key, Player player, char[,] matrix);
+        void ProcessInput(ConsoleKeyInfo key, Player player, SingleElement[,] matrix, IRenderer renderer);
     }
 }

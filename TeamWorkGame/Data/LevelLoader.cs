@@ -3,6 +3,7 @@
     using System;
     using System.IO;
     using System.Text;
+    using TeamWorkGame.GameObjects;
 
     public class LevelLoader
     {
@@ -10,14 +11,14 @@
         private const int Matrix_Size = 10;
         private const int Max_Level = 5;
 
-        public char[,] LoadLevel(int level)
+        public SingleElement[,] LoadLevel(int level)
         {
             if (level <= 0 || Max_Level < level)
             {
                 throw new ArgumentOutOfRangeException(string.Format("Valid level must be provided! Available levels 1-{0}.", Max_Level));
             }
 
-            char[,] currentLevel = new char[Matrix_Size, Matrix_Size];
+            SingleElement[,] currentLevel = new SingleElement[Matrix_Size, Matrix_Size];
             string line;
             int lineCount = 0;
             StreamReader reader = null;
@@ -29,7 +30,27 @@
                 {
                     for (int i = 0; i < Matrix_Size; i++)
                     {
-                        currentLevel[lineCount, i] = line[i];
+                        ConsoleColor current;
+                        if (line[i] == '#')
+                        {
+                            current = ConsoleColor.Gray;
+
+                        }
+                        else if (line[i] == '*')
+                        {
+                            current = ConsoleColor.Yellow;
+                        }
+                        else if (line[i] == 'K')
+                        {
+                            current = ConsoleColor.Cyan;
+                        }
+                        else
+                        {
+                            current = ConsoleColor.Black;
+                        }
+
+                        currentLevel[lineCount, i] = new SingleElement(current, line[i]);
+                        
                     }
 
                     lineCount++;

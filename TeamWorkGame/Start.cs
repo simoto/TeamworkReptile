@@ -26,10 +26,11 @@
 
             //TODO: MainMenu must be here with user choose
             player = new Player("Test", 1, "somePass");
-            
+            player.Position.Row = 2;
+            player.Position.Col = 3;
             //TODO: MapLoader loads the current map with current user
             levelLoader = new LevelLoader();
-            char[,] currentMap = levelLoader.LoadLevel(1);
+            SingleElement[,] currentMap = levelLoader.LoadLevel(1);
 
             //TODO: Render current map
             renderer = new ConsoleRenderer();
@@ -42,7 +43,7 @@
                 Console.SetCursorPosition(40, 0);
                 ConsoleKeyInfo pressedKey = Console.ReadKey();
 
-                ui.ProcessInput(pressedKey, player, currentMap);
+                ui.ProcessInput(pressedKey, player, currentMap, renderer);
             }
         }
     }

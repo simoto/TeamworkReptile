@@ -64,7 +64,7 @@
             return save;
         }
 
-        public static void Save(char[,] matrix, Player player)
+        public static void Save(SingleElement[,] matrix, Player player)
         {
             if (matrix == null)
             {
