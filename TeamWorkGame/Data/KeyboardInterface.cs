@@ -17,6 +17,18 @@
                     player.Move(Direction.Left);
                     player.Moves++;
                 }
+                else if (false) // K , and k-- is solid
+                {
+
+                } 
+                else if(false) // k, and k-- is *
+                {
+
+                }
+                else if (false) // K , and k-- p--
+                {
+
+                }
             }
             else if (pressedKey.Key.Equals(ConsoleKey.RightArrow))
             {
