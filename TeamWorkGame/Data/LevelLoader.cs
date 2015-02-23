@@ -5,13 +5,13 @@
     using System.Text;
     using TeamWorkGame.GameObjects;
 
-    public class LevelLoader
+    public static class LevelLoader
     {
         private const string filePath = @"../../Data/Levels/Level";
         private const int Matrix_Size = 10;
         private const int Max_Level = 5;
 
-        public SingleElement[,] LoadLevel(int level)
+        public static SingleElement[,] LoadLevel(int level)
         {
             if (level <= 0 || Max_Level < level)
             {

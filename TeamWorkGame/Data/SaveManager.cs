@@ -89,7 +89,7 @@
                 {
                     for (int col = 0; col < Matrix_Size; col++)
                     {
-                        sb.Append(matrix[row, col]);
+                        sb.Append(matrix[row, col].ToString());
                     }
 
                     sw.WriteLine(sb.ToString());

@@ -1,6 +1,7 @@
 ﻿namespace TeamWorkGame
 {
     using System;
+    using System.Collections.Generic;
     using TeamWorkGame.Data;
     using TeamWorkGame.GameObjects;
     using TeamWorkGame.Interfaces;
@@ -10,10 +11,10 @@
         const int Height = 20;
         const int Width = 50;
         const string Title = "ReptileMovingBox";
-        static LevelLoader levelLoader;
         static IRenderer renderer;
         public static Player player;
         static IUserInterface ui;
+        static List<Participant> ranking;
 
         static void Main()
         {
@@ -21,14 +22,13 @@
             Console.WindowHeight = Height;
             Console.WindowWidth = Width;
             ui = new KeyboardInterface();
-
+            ranking = RankingManager.Load();
             //TODO: Here is the start point of the game
 
             //TODO: MainMenu must be here with user choose
             player = new Player("Test", 1, "somePass");
             //TODO: MapLoader loads the current map with current user
-            levelLoader = new LevelLoader();
-            SingleElement[,] currentMap = levelLoader.LoadLevel(1);
+            SingleElement[,] currentMap = LevelLoader.LoadLevel(1);
             MapReader.SetPlayerPossition(player, currentMap);
 
             //TODO: Render current map
@@ -43,10 +43,21 @@
                 ConsoleKeyInfo pressedKey = Console.ReadKey();
                 if (MapReader.CheckIfLevelIfOver(player, currentMap))
                 {
-                    // TODO check if next level
-                    return;
+                    int currentLevel = player.Level;
+                    if (currentLevel == 5)
+                    {
+                        RankingManager.Save(ranking, new Participant(player.Name, player.Level, player.Moves));
+                        return;
+                    }
+                    else
+                    {
+                        currentMap = LevelLoader.LoadLevel(currentLevel + 1);
+                        player.Level = currentLevel + 1;
+                        MapReader.SetPlayerPossition(player, currentMap);
+                        renderer.RenderMap(currentMap);
+                    }
                 }
-                ui.ProcessInput(pressedKey, player, currentMap, renderer);
+                ui.ProcessInput(pressedKey, player, ref currentMap, renderer);
             }
         }
     }
