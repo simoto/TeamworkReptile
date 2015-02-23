@@ -30,26 +30,27 @@
                 {
                     for (int i = 0; i < Matrix_Size; i++)
                     {
-                        ConsoleColor current;
+                        ConsoleColor currentCollor;
+                        bool isSolid = false;
                         if (line[i] == '#')
                         {
-                            current = ConsoleColor.Gray;
-
+                            currentCollor = ConsoleColor.Gray;
+                            isSolid = true;
                         }
                         else if (line[i] == '*')
                         {
-                            current = ConsoleColor.Yellow;
+                            currentCollor = ConsoleColor.Yellow;
                         }
                         else if (line[i] == 'K')
                         {
-                            current = ConsoleColor.Cyan;
+                            currentCollor = ConsoleColor.Cyan;
                         }
                         else
                         {
-                            current = ConsoleColor.Black;
+                            currentCollor = ConsoleColor.Black;
                         }
 
-                        currentLevel[lineCount, i] = new SingleElement(current, line[i]);
+                        currentLevel[lineCount, i] = new SingleElement(currentCollor, line[i], isSolid);
                         
                     }
 

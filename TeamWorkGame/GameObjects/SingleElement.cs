@@ -6,10 +6,11 @@
     {
         private char symbol;
 
-        public SingleElement(ConsoleColor color, char symbol)
+        public SingleElement(ConsoleColor color, char symbol, bool isSolid)
         {
             this.Color = color;
             this.Symbol = symbol;
+            this.IsSolid = isSolid;
         }
 
         public ConsoleColor Color { get; set; }
@@ -24,7 +25,7 @@
             }
             set
             {
-                if (value == '#')
+                if (value == '#' || value == '@')
                 {
                     this.IsSolid = true;
                     this.symbol = value;

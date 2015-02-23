@@ -41,7 +41,11 @@
                 renderer.RenderPlayer(player);
                 Console.SetCursorPosition(40, 0);
                 ConsoleKeyInfo pressedKey = Console.ReadKey();
-
+                if (MapReader.CheckIfLevelIfOver(player, currentMap))
+                {
+                    // TODO check if next level
+                    return;
+                }
                 ui.ProcessInput(pressedKey, player, currentMap, renderer);
             }
         }

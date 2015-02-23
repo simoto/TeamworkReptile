@@ -19,5 +19,21 @@ namespace TeamWorkGame.Data
                 }
             }
         }
+
+        public static bool CheckIfLevelIfOver(Player player, SingleElement[,] map)
+        {
+            for (int i = 0; i < map.GetLength(0); i++)
+            {
+                for (int j = 0; j < map.GetLength(1); j++)
+                {
+                    if (map[i, j].Symbol == '*')
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
     }
 }
