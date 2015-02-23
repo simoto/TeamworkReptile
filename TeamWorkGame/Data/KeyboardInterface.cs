@@ -10,24 +10,28 @@
         public void ProcessInput(ConsoleKeyInfo pressedKey, Player player, ref SingleElement[,] currentMap, IRenderer renderer)
         {
             if (pressedKey.Key.Equals(ConsoleKey.LeftArrow))
-            {
+            {                
                 if (currentMap[player.Position.Row, player.Position.Col - 1].IsSolid)
                 {
                     SystemSounds.Hand.Play();
                 }
-                else if (currentMap[player.Position.Row, player.Position.Col - 1].Symbol == 'K' && currentMap[player.Position.Row, player.Position.Col - 2].IsSolid) // K , and k-- is solid
+                else if (currentMap[player.Position.Row, player.Position.Col - 1].Symbol == 'K' 
+                    && currentMap[player.Position.Row, player.Position.Col - 2].IsSolid) 
+                {
+                    //// K , and k-- is solid
+                    SystemSounds.Hand.Play();
+                }
+                else if (currentMap[player.Position.Row, player.Position.Col - 1].Symbol == 'K' 
+                    && currentMap[player.Position.Row, player.Position.Col - 2].Symbol == 'K')
                 {
                     SystemSounds.Hand.Play();
                 }
-                else if (currentMap[player.Position.Row, player.Position.Col - 1].Symbol == 'K' && currentMap[player.Position.Row, player.Position.Col - 2].Symbol == 'K')
+                else if (currentMap[player.Position.Row, player.Position.Col - 1].Symbol == 'K' && currentMap[player.Position.Row, player.Position.Col - 2].Symbol == ' ')
                 {
-                    SystemSounds.Hand.Play();
-                }
-                else if (currentMap[player.Position.Row, player.Position.Col - 1].Symbol == 'K' && currentMap[player.Position.Row, player.Position.Col - 2].Symbol == ' ') // K-- is ' '
-                {
-                    //K--
+                    //// K-- is ' '
+                    ////K--
                     currentMap[player.Position.Row, player.Position.Col - 2].Symbol = 'K';
-                    //H--
+                    ////H--
                     currentMap[player.Position.Row, player.Position.Col - 1].Symbol = ' ';
 
                     renderer.RenderBrick(currentMap[player.Position.Row, player.Position.Col - 2], player.Position.Row, player.Position.Col - 2);
@@ -40,12 +44,13 @@
                     player.Moves++;
                     SystemSounds.Asterisk.Play();
                 }
-                else if (currentMap[player.Position.Row, player.Position.Col - 1].Symbol == 'K' && currentMap[player.Position.Row, player.Position.Col - 2].Symbol == '*') // k, and k-- is *
+                else if (currentMap[player.Position.Row, player.Position.Col - 1].Symbol == 'K' && currentMap[player.Position.Row, player.Position.Col - 2].Symbol == '*')
                 {
-                    //K--
+                    //// k, and k-- is *
+                    ////K--
                     currentMap[player.Position.Row, player.Position.Col - 2].Symbol = '@';
                     currentMap[player.Position.Row, player.Position.Col - 2].IsSolid = true;
-                    //H--
+                    ////H--
                     currentMap[player.Position.Row, player.Position.Col - 1].Symbol = ' ';
 
                     renderer.RenderBrick(currentMap[player.Position.Row, player.Position.Col - 2], player.Position.Row, player.Position.Col - 2);
@@ -243,7 +248,7 @@
             }
             else if (pressedKey.Key == ConsoleKey.S)
             {
-                // TODO ask player for pass/key
+                //// TODO ask player for pass/key
                 var password = "TODO";
 
                 SaveManager.Save(currentMap, player);
@@ -252,12 +257,12 @@
             }
             else if (pressedKey.Key == ConsoleKey.L)
             {
-                //load
+                ////load
                 throw new NotImplementedException();
             }
             else if (pressedKey.Key == ConsoleKey.R)
             {
-                // restart level
+                //// restart level
                 currentMap = LevelLoader.LoadLevel(player.Level);
                 MapReader.SetPlayerPossition(player, currentMap);
                 renderer.RenderMap(currentMap);

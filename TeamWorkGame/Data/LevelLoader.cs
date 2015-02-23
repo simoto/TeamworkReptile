@@ -7,61 +7,59 @@
 
     public static class LevelLoader
     {
-        private const string filePath = @"../../Data/Levels/Level";
-        private const int Matrix_Size = 10;
-        private const int Max_Level = 5;
-        private const ConsoleColor Solid_Color = ConsoleColor.Gray;
-        private const ConsoleColor Target_Color = ConsoleColor.Yellow;
-        private const ConsoleColor Barrel_Color = ConsoleColor.Cyan;
-        private const ConsoleColor Empty_Color = ConsoleColor.Black;
+        private const string FilePath = @"../../Data/Levels/Level";
+        private const int MatrixSize = 10;
+        private const int MaxLevel = 5;
+        private const ConsoleColor SolidColor = ConsoleColor.Gray;
+        private const ConsoleColor TargetColor = ConsoleColor.Yellow;
+        private const ConsoleColor BarrelColor = ConsoleColor.Cyan;
+        private const ConsoleColor EmptyColor = ConsoleColor.Black;
 
         public static SingleElement[,] LoadLevel(int level)
         {
-            if (level <= 0 || Max_Level < level)
+            if (level <= 0 || MaxLevel < level)
             {
-                throw new ArgumentOutOfRangeException(string.Format("Valid level must be provided! Available levels 1-{0}.", Max_Level));
+                throw new ArgumentOutOfRangeException(string.Format("Valid level must be provided! Available levels 1-{0}.", MaxLevel));
             }
 
-            SingleElement[,] currentLevel = new SingleElement[Matrix_Size, Matrix_Size];
+            SingleElement[,] currentLevel = new SingleElement[MatrixSize, MatrixSize];
             string line;
             int lineCount = 0;
             StreamReader reader = null;
 
             try
             {
-                reader = new StreamReader(filePath + level + ".txt");
+                reader = new StreamReader(FilePath + level + ".txt");
                 while ((line = reader.ReadLine()) != null)
                 {
-                    for (int i = 0; i < Matrix_Size; i++)
+                    for (int i = 0; i < MatrixSize; i++)
                     {
                         ConsoleColor currentCollor;
                         bool isSolid = false;
                         if (line[i] == '#')
                         {
-                            currentCollor = Solid_Color;
+                            currentCollor = SolidColor;
                             isSolid = true;
                         }
                         else if (line[i] == '*')
                         {
-                            currentCollor = Target_Color;
+                            currentCollor = TargetColor;
                         }
                         else if (line[i] == 'K')
                         {
-                            currentCollor = Barrel_Color;
+                            currentCollor = BarrelColor;
                         }
                         else
                         {
-                            currentCollor = Empty_Color;
+                            currentCollor = EmptyColor;
                         }
 
-                        currentLevel[lineCount, i] = new SingleElement(currentCollor, line[i], isSolid);
-                        
+                        currentLevel[lineCount, i] = new SingleElement(currentCollor, line[i], isSolid);                        
                     }
 
                     lineCount++;
                 }
             }
-
             catch (FileNotFoundException ex)
             {
                 throw new FileNotFoundException("Error: Could not read file from disk. Original error: " + ex.Message);
@@ -70,7 +68,6 @@
             {
                 throw new Exception("Error: Something went wrong. Original error: " + ex.Message);
             }
-
             finally
             {
                 if (reader != null)

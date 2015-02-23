@@ -7,33 +7,33 @@
 
     public class SaveManager
     {
-        private const string filePath = @"../../Data/Saves/";
-        private const int Matrix_Size = 10;
-        private const int Max_Level = 5;
-        private const int Name_Max_Length = 10;
-        private const int Password_Max_Length = 10;
+        private const string FilePath = @"../../Data/Saves/";
+        private const int MatrixSize = 10;
+        private const int MaxLevel = 5;
+        private const int NameMaxLength = 10;
+        private const int PasswordMaxLength = 10;
 
         public static Save Load(string name, string password)
         {
-            if (name == string.Empty || Name_Max_Length < name.Length)
+            if (name == string.Empty || NameMaxLength < name.Length)
             {
                 throw new ArgumentOutOfRangeException("Invalid name!");
             }
 
-            if (password == string.Empty || Password_Max_Length < password.Length)
+            if (password == string.Empty || PasswordMaxLength < password.Length)
             {
                 throw new ArgumentOutOfRangeException("Invalid password!");
             }
 
-            char[,] currentLevel = new char[Matrix_Size, Matrix_Size];
+            char[,] currentLevel = new char[MatrixSize, MatrixSize];
             string line;
 
             var save = new Save();
             StreamReader streamReader = null;
 
-            using (streamReader = new StreamReader(filePath + name + "&" + password + ".txt"))
+            using (streamReader = new StreamReader(FilePath + name + "&" + password + ".txt"))
             {
-                for (int row = 0; row < Matrix_Size; row++)
+                for (int row = 0; row < MatrixSize; row++)
                 {
                     line = streamReader.ReadLine();
 
@@ -42,7 +42,7 @@
                         break;
                     }
 
-                    for (int col = 0; col < Matrix_Size; col++)
+                    for (int col = 0; col < MatrixSize; col++)
                     {
                         currentLevel[row, col] = line[col];
                     }
@@ -71,23 +71,23 @@
                 throw new ArgumentNullException("Matrix is null!");
             }
 
-            if (player.Name == string.Empty || Name_Max_Length < player.Name.Length)
+            if (player.Name == string.Empty || NameMaxLength < player.Name.Length)
             {
                 throw new ArgumentOutOfRangeException("Invalid name!");
             }
 
-            if (player.Password == string.Empty || Password_Max_Length < player.Password.Length)
+            if (player.Password == string.Empty || PasswordMaxLength < player.Password.Length)
             {
                 throw new ArgumentOutOfRangeException("Invalid password!");
             }
 
-            using (StreamWriter sw = new StreamWriter(filePath + player.Name + "&" + player.Password + ".txt"))
+            using (StreamWriter sw = new StreamWriter(FilePath + player.Name + "&" + player.Password + ".txt"))
             {
-                StringBuilder sb = new StringBuilder(Matrix_Size);
+                StringBuilder sb = new StringBuilder(MatrixSize);
 
-                for (int row = 0; row < Matrix_Size; row++)
+                for (int row = 0; row < MatrixSize; row++)
                 {
-                    for (int col = 0; col < Matrix_Size; col++)
+                    for (int col = 0; col < MatrixSize; col++)
                     {
                         sb.Append(matrix[row, col].ToString());
                     }

@@ -8,17 +8,17 @@
 
     public class RankingManager
     {
-        private const string filePath = @"../../Data/Ranking/top10.txt";
-        private const int Ranking_Size = 10;
+        private const string FilePath = @"../../Data/Ranking/top10.txt";
+        private const int RankingSize = 10;
 
-        public static List<Participant> Load(int rankingSize = Ranking_Size)
+        public static List<Participant> Load(int rankingSize = RankingSize)
         {
             StreamReader reader = null;
             var ranking = new List<Participant>();
 
             try
             {
-                reader = new StreamReader(filePath);
+                reader = new StreamReader(FilePath);
                 char[] separators = { ' ' };
                 int counter = 0;
                 string line = string.Empty;
@@ -34,7 +34,6 @@
                     counter++;
                 }
             }
-
             catch (FileNotFoundException ex)
             {
                 throw new FileNotFoundException("Error: Could not read file from disk. Original error: " + ex.Message);
@@ -43,7 +42,6 @@
             {
                 throw new Exception("Error: Something went wrong. Original error: " + ex.Message);
             }
-
             finally
             {
                 if (reader != null)
@@ -54,9 +52,10 @@
 
             return ranking;
         }
+
         public static void Save(List<Participant> participants, Participant participant)
         {
-            bool hasTenPlayers = participants.Count == Ranking_Size;
+            bool hasTenPlayers = participants.Count == RankingSize;
             bool isLastPlayerLevelBigger = participants.Last().Level > participant.Level;
             bool hasEqualLevelButMoreMoves = participants.Last().Level == participant.Level && participants.Last().Moves < participant.Moves;
 
@@ -73,7 +72,7 @@
                                 .ThenBy(p => p.Moves)
                                 .Take(10);
 
-            using (StreamWriter sw = new StreamWriter(filePath))
+            using (StreamWriter sw = new StreamWriter(FilePath))
             {
                 foreach (var player in finalRanking)
                 {

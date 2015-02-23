@@ -1,6 +1,7 @@
-﻿using TeamWorkGame.GameObjects;
-namespace TeamWorkGame.Data
+﻿namespace TeamWorkGame.Data
 {
+    using TeamWorkGame.GameObjects;
+
     public class MapReader
     {
         public static void SetPlayerPossition(Player player, SingleElement[,] map)

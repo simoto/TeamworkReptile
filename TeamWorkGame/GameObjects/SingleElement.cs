@@ -23,6 +23,7 @@
             {
                 return this.symbol;
             }
+
             set
             {
                 if (value == '#' || value == '@')
