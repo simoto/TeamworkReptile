@@ -11,32 +11,116 @@
         {
             if (pressedKey.Key.Equals(ConsoleKey.LeftArrow))
             {
-                if (!matrix[player.Position.Row, player.Position.Col - 1].IsSolid)
+                if (matrix[player.Position.Row, player.Position.Col - 1].IsSolid)
+                {
+                    SystemSounds.Hand.Play();
+                }
+                else if (matrix[player.Position.Row, player.Position.Col - 1].Symbol == 'K' && matrix[player.Position.Row, player.Position.Col - 2].IsSolid) // K , and k-- is solid
+                {
+                    SystemSounds.Hand.Play();
+                }
+                else if (matrix[player.Position.Row, player.Position.Col - 1].Symbol == 'K' && matrix[player.Position.Row, player.Position.Col - 2].Symbol == ' ') // K-- is ' '
+                {
+                    //K--
+                    matrix[player.Position.Row, player.Position.Col - 2].Symbol = 'K';
+                    //H--
+                    matrix[player.Position.Row, player.Position.Col - 1].Symbol = ' ';
+
+                    renderer.RenderBrick(matrix[player.Position.Row, player.Position.Col - 2], player.Position.Row, player.Position.Col - 2);
+
+                    renderer.RenderBrick(matrix[player.Position.Row, player.Position.Col - 1], player.Position.Row, player.Position.Col - 1);
+
+                    renderer.RenderBrick(matrix[player.Position.Row, player.Position.Col], player.Position.Row, player.Position.Col);
+
+                    player.Move(Direction.Left);
+                    player.Moves++;
+                    SystemSounds.Asterisk.Play();
+                }
+                else if (matrix[player.Position.Row, player.Position.Col - 1].Symbol == 'K' && matrix[player.Position.Row, player.Position.Col - 2].Symbol == '*') // k, and k-- is *
+                {
+                    //K--
+                    matrix[player.Position.Row, player.Position.Col - 2].Symbol = '@';
+                    matrix[player.Position.Row, player.Position.Col - 2].IsSolid = true;
+                    //H--
+                    matrix[player.Position.Row, player.Position.Col - 1].Symbol = ' ';
+
+                    renderer.RenderBrick(matrix[player.Position.Row, player.Position.Col - 2], player.Position.Row, player.Position.Col - 2);
+
+                    renderer.RenderBrick(matrix[player.Position.Row, player.Position.Col - 1], player.Position.Row, player.Position.Col - 1);
+
+                    renderer.RenderBrick(matrix[player.Position.Row, player.Position.Col], player.Position.Row, player.Position.Col);
+
+                    player.Move(Direction.Left);
+                    player.Moves++;
+                    SystemSounds.Asterisk.Play();
+                }
+                else if (matrix[player.Position.Row, player.Position.Col - 1].Symbol == 'K' && matrix[player.Position.Row, player.Position.Col - 2].IsSolid)
+                {
+                    SystemSounds.Hand.Play();
+                }
+                else if (!matrix[player.Position.Row, player.Position.Col - 1].IsSolid)
                 {
                     renderer.RenderBrick(matrix[player.Position.Row, player.Position.Col], player.Position.Row, player.Position.Col);
                     player.Move(Direction.Left);
                     player.Moves++;
-                }
-                else if (false) // K , and k-- is solid
-                {
-
-                } 
-                else if(false) // k, and k-- is *
-                {
-
-                }
-                else if (false) // K , and k-- p--
-                {
-
+                    SystemSounds.Asterisk.Play();
                 }
             }
             else if (pressedKey.Key.Equals(ConsoleKey.RightArrow))
             {
-                if (!matrix[player.Position.Row, player.Position.Col + 1].IsSolid)
+                if (matrix[player.Position.Row, player.Position.Col + 1].IsSolid)
+                {
+                    SystemSounds.Hand.Play();
+                }
+                else if (matrix[player.Position.Row, player.Position.Col + 1].Symbol == 'K' && matrix[player.Position.Row, player.Position.Col + 2].IsSolid)
+                {
+                    SystemSounds.Hand.Play();
+                }
+                else if (matrix[player.Position.Row, player.Position.Col + 1].Symbol == 'K' && matrix[player.Position.Row, player.Position.Col + 2].Symbol == ' ') // K-- is ' '
+                {
+                    //K--
+                    matrix[player.Position.Row, player.Position.Col + 2].Symbol = 'K';
+                    //H--
+                    matrix[player.Position.Row, player.Position.Col + 1].Symbol = ' ';
+
+                    renderer.RenderBrick(matrix[player.Position.Row, player.Position.Col + 2], player.Position.Row, player.Position.Col + 2);
+
+                    renderer.RenderBrick(matrix[player.Position.Row, player.Position.Col + 1], player.Position.Row, player.Position.Col + 1);
+
+                    renderer.RenderBrick(matrix[player.Position.Row, player.Position.Col], player.Position.Row, player.Position.Col);
+
+                    player.Move(Direction.Right);
+                    player.Moves++;
+                    SystemSounds.Asterisk.Play();
+                }
+                else if (matrix[player.Position.Row, player.Position.Col + 1].Symbol == 'K' && matrix[player.Position.Row, player.Position.Col + 2].Symbol == '*') // k, and k-- is *
+                {
+                    //K--
+                    matrix[player.Position.Row, player.Position.Col + 2].Symbol = '@';
+                    matrix[player.Position.Row, player.Position.Col + 2].IsSolid = true;
+                    //H--
+                    matrix[player.Position.Row, player.Position.Col + 1].Symbol = ' ';
+
+                    renderer.RenderBrick(matrix[player.Position.Row, player.Position.Col + 2], player.Position.Row, player.Position.Col + 2);
+
+                    renderer.RenderBrick(matrix[player.Position.Row, player.Position.Col + 1], player.Position.Row, player.Position.Col + 1);
+
+                    renderer.RenderBrick(matrix[player.Position.Row, player.Position.Col], player.Position.Row, player.Position.Col);
+
+                    player.Move(Direction.Right);
+                    player.Moves++;
+                    SystemSounds.Asterisk.Play();
+                }
+                else if (matrix[player.Position.Row, player.Position.Col + 1].Symbol == 'K' && matrix[player.Position.Row, player.Position.Col + 2].IsSolid)
+                {
+                    SystemSounds.Hand.Play();
+                }
+                else if (!matrix[player.Position.Row, player.Position.Col + 1].IsSolid)
                 {
                     renderer.RenderBrick(matrix[player.Position.Row, player.Position.Col], player.Position.Row, player.Position.Col);
                     player.Move(Direction.Right);
                     player.Moves++;
+                    SystemSounds.Asterisk.Play();
                 }
             }
             else if (pressedKey.Key.Equals(ConsoleKey.UpArrow))

@@ -13,6 +13,7 @@ namespace TeamWorkGame.Data
                     {
                         player.Position.Row = i;
                         player.Position.Col = j;
+                        map[i, j].Symbol = ' ';
                         return;
                     }
                 }
