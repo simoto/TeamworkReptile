@@ -257,6 +257,7 @@
             }
             else if (pressedKey.Key == ConsoleKey.R)
             {
+                // restart level
                 currentMap = LevelLoader.LoadLevel(player.Level);
                 MapReader.SetPlayerPossition(player, currentMap);
                 renderer.RenderMap(currentMap);
@@ -265,7 +266,12 @@
             else if (pressedKey.Key == ConsoleKey.N)
             {
                 // end game, start from level 1
-                throw new NotImplementedException();
+                currentMap = LevelLoader.LoadLevel(1);
+                MapReader.SetPlayerPossition(player, currentMap);
+                player.Level = 1;
+                player.Moves = 0;
+                renderer.RenderMap(currentMap);
+                renderer.RenderPlayer(player);
             }
         }
     }

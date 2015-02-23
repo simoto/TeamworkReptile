@@ -10,6 +10,10 @@
         private const string filePath = @"../../Data/Levels/Level";
         private const int Matrix_Size = 10;
         private const int Max_Level = 5;
+        private const ConsoleColor Solid_Color = ConsoleColor.Gray;
+        private const ConsoleColor Target_Color = ConsoleColor.Yellow;
+        private const ConsoleColor Barrel_Color = ConsoleColor.Cyan;
+        private const ConsoleColor Empty_Color = ConsoleColor.Black;
 
         public static SingleElement[,] LoadLevel(int level)
         {
@@ -34,20 +38,20 @@
                         bool isSolid = false;
                         if (line[i] == '#')
                         {
-                            currentCollor = ConsoleColor.Gray;
+                            currentCollor = Solid_Color;
                             isSolid = true;
                         }
                         else if (line[i] == '*')
                         {
-                            currentCollor = ConsoleColor.Yellow;
+                            currentCollor = Target_Color;
                         }
                         else if (line[i] == 'K')
                         {
-                            currentCollor = ConsoleColor.Cyan;
+                            currentCollor = Barrel_Color;
                         }
                         else
                         {
-                            currentCollor = ConsoleColor.Black;
+                            currentCollor = Empty_Color;
                         }
 
                         currentLevel[lineCount, i] = new SingleElement(currentCollor, line[i], isSolid);
