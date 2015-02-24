@@ -10,6 +10,7 @@
         private const string MenuLoadMessage = "L => Load previuos game.";
         private const string MenuRestartMessage = "R => Restart level.";
         private const string MenuNewGameMessage = "N => Start new game.";
+        private const string MenuNextLevelMessage = "Space => Start next level.";
         private const int MenuRenderColumn = 20;
         private const ConsoleColor PlayerBackgroundColor = ConsoleColor.DarkRed;
         private const ConsoleColor PlayerColor = ConsoleColor.White;
@@ -63,6 +64,8 @@
             Console.WriteLine(MenuRestartMessage);
             Console.SetCursorPosition(MenuRenderColumn, 8);
             Console.WriteLine(MenuNewGameMessage);
+            Console.SetCursorPosition(MenuRenderColumn, 10);
+            Console.WriteLine(MenuNextLevelMessage);
         }
 
         public void RenderMoves(int moves)

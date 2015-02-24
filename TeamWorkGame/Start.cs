@@ -39,12 +39,13 @@
             renderer.RenderMap(currentMap);
             renderer.RenderInGameMenu();
             renderer.RenderMoves(player.Moves);
+            ConsoleKeyInfo pressedKey;
             ////TODO: Here will be the game loop, KeyboardInterface usage
             while (true)
             {
                 renderer.RenderPlayer(player);
                 Console.SetCursorPosition(20, 11);
-                ConsoleKeyInfo pressedKey = Console.ReadKey();
+                pressedKey = Console.ReadKey();
                 if (MapReader.CheckIfLevelIfOver(player, currentMap))
                 {
                     int currentLevel = player.Level;
@@ -60,6 +61,7 @@
                         MapReader.SetPlayerPosition(player, currentMap);
                         renderer.RenderMap(currentMap);
                         renderer.RenderInGameMenu();
+                        renderer.RenderMoves(player.Moves);
                     }
                 }
 
