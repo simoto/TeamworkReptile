@@ -2,7 +2,7 @@
 {
     using TeamWorkGame.Data;
 
-    interface IMovable
+    public interface IMovable
     {
         void Move(Direction direction);
     }

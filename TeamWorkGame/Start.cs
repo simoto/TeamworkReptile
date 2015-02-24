@@ -39,7 +39,7 @@
             while (true)
             {
                 renderer.RenderPlayer(player);
-                Console.SetCursorPosition(40, 0);
+                Console.SetCursorPosition(20, 11);
                 ConsoleKeyInfo pressedKey = Console.ReadKey();
                 if (MapReader.CheckIfLevelIfOver(player, currentMap))
                 {

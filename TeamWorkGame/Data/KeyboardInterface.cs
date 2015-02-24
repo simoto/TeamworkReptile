@@ -11,19 +11,19 @@
         {
             if (pressedKey.Key.Equals(ConsoleKey.LeftArrow))
             {
-                Move(0, -1, Direction.Left, player, ref currentMap, renderer);
+                this.Move(0, -1, Direction.Left, player, ref currentMap, renderer);
             }
             else if (pressedKey.Key.Equals(ConsoleKey.RightArrow))
             {
-                Move(0, 1, Direction.Right, player, ref currentMap, renderer);
+                this.Move(0, 1, Direction.Right, player, ref currentMap, renderer);
             }
             else if (pressedKey.Key.Equals(ConsoleKey.UpArrow))
             {
-                Move(-1, 0, Direction.Up, player, ref currentMap, renderer);
+                this.Move(-1, 0, Direction.Up, player, ref currentMap, renderer);
             }
             else if (pressedKey.Key.Equals(ConsoleKey.DownArrow))
             {
-                Move(1, 0, Direction.Down, player, ref currentMap, renderer);
+                this.Move(1, 0, Direction.Down, player, ref currentMap, renderer);
             }
             else if (pressedKey.Key == ConsoleKey.S)
             {
@@ -61,67 +61,72 @@
 
         private void Move(int rowMove, int colMove, Direction direction, Player player, ref SingleElement[,] currentMap, IRenderer renderer)
         {
-            if (currentMap[player.Position.Row + rowMove, player.Position.Col + colMove].IsSolid)
+            int newRow = player.Position.Row + rowMove;
+            int newCol = player.Position.Col + colMove;
+            int nextToNewRow = player.Position.Row + (2 * rowMove);
+            int nextToNewCol = player.Position.Col + (2 * colMove);
+            int playerRow = player.Position.Row;
+            int playerCol = player.Position.Col;
+
+            if (currentMap[newRow, newCol].IsSolid)
             {
                 SystemSounds.Hand.Play();
             }
-            else if (currentMap[player.Position.Row + rowMove, player.Position.Col + colMove].Symbol == 'K'
-                && currentMap[player.Position.Row + (2 * rowMove), player.Position.Col + (2 * colMove)].IsSolid)
+            else if (currentMap[newRow, newCol].Symbol == 'K'
+                && currentMap[nextToNewRow, nextToNewCol].IsSolid)
             {
                 //// next to K is solid
                 SystemSounds.Hand.Play();
             }
-            else if (currentMap[player.Position.Row + rowMove, player.Position.Col + colMove].Symbol == 'K'
-                && currentMap[player.Position.Row + (2 * rowMove), player.Position.Col + (2 * colMove)].Symbol == 'K')
+            else if (currentMap[newRow, newCol].Symbol == 'K'
+                && currentMap[nextToNewRow, nextToNewCol].Symbol == 'K')
             {
                 SystemSounds.Hand.Play();
             }
-            else if (currentMap[player.Position.Row + rowMove, player.Position.Col + colMove].Symbol == 'K' && currentMap[player.Position.Row + (2 * rowMove), player.Position.Col + (2 * colMove)].Symbol == ' ')
+            else if (currentMap[newRow, newCol].Symbol == 'K' && currentMap[nextToNewRow, nextToNewCol].Symbol == ' ')
             {
                 //// next to K is ' '
-                currentMap[player.Position.Row + (2 * rowMove), player.Position.Col + (2 * colMove)].Symbol = 'K';
+                currentMap[nextToNewRow, nextToNewCol].Symbol = 'K';
                 //// H--
-                currentMap[player.Position.Row + rowMove, player.Position.Col + colMove].Symbol = ' ';
+                currentMap[newRow, newCol].Symbol = ' ';
 
-                renderer.RenderBrick(currentMap[player.Position.Row + (2 * rowMove), player.Position.Col + (2 * colMove)], player.Position.Row + (2 * rowMove), player.Position.Col + (2 * colMove));
+                renderer.RenderBrick(currentMap[nextToNewRow, nextToNewCol], nextToNewRow, nextToNewCol);
 
-                renderer.RenderBrick(currentMap[player.Position.Row + rowMove, player.Position.Col + colMove], player.Position.Row + rowMove, player.Position.Col + colMove);
+                renderer.RenderBrick(currentMap[newRow, newCol], newRow, newCol);
 
-                renderer.RenderBrick(currentMap[player.Position.Row, player.Position.Col], player.Position.Row, player.Position.Col);
+                renderer.RenderBrick(currentMap[playerRow, playerCol], playerRow, playerCol);
 
                 player.Move(direction);
                 player.Moves++;
-                SystemSounds.Asterisk.Play();
             }
-            else if (currentMap[player.Position.Row + rowMove, player.Position.Col + colMove].Symbol == 'K' && currentMap[player.Position.Row + (2 * rowMove), player.Position.Col + (2 * colMove)].Symbol == '*')
+            else if (currentMap[newRow, newCol].Symbol == 'K' && currentMap[nextToNewRow, nextToNewCol].Symbol == '*')
             {
                 //// next to K is *
                 ////K--
-                currentMap[player.Position.Row + (2 * rowMove), player.Position.Col + (2 * colMove)].Symbol = '@';
-                currentMap[player.Position.Row + (2 * rowMove), player.Position.Col + (2 * colMove)].IsSolid = true;
+                currentMap[nextToNewRow, nextToNewCol].Symbol = '@';
+                currentMap[nextToNewRow, nextToNewCol].IsSolid = true;
                 ////H--
-                currentMap[player.Position.Row + rowMove, player.Position.Col + colMove].Symbol = ' ';
+                currentMap[newRow, newCol].Symbol = ' ';
 
-                renderer.RenderBrick(currentMap[player.Position.Row + (2 * rowMove), player.Position.Col + (2 * colMove)], player.Position.Row + (2 * rowMove), player.Position.Col + (2 * colMove));
+                renderer.RenderBrick(currentMap[nextToNewRow, nextToNewCol], nextToNewRow, nextToNewCol);
 
-                renderer.RenderBrick(currentMap[player.Position.Row + rowMove, player.Position.Col + colMove], player.Position.Row + rowMove, player.Position.Col + colMove);
+                renderer.RenderBrick(currentMap[newRow, newCol], newRow, newCol);
 
-                renderer.RenderBrick(currentMap[player.Position.Row, player.Position.Col], player.Position.Row, player.Position.Col);
+                renderer.RenderBrick(currentMap[playerRow, playerCol], playerRow, playerCol);
 
                 player.Move(direction);
                 player.Moves++;
                 SystemSounds.Asterisk.Play();
             }
-            else if (currentMap[player.Position.Row + rowMove, player.Position.Col + colMove].Symbol == 'K' && currentMap[player.Position.Row + (2 * rowMove), player.Position.Col + (2 * colMove)].IsSolid)
+            else if (currentMap[newRow, newCol].Symbol == 'K' && currentMap[nextToNewRow, nextToNewCol].IsSolid)
             {
                 SystemSounds.Hand.Play();
             }
-            else if (!currentMap[player.Position.Row + rowMove, player.Position.Col + colMove].IsSolid)
+            else if (!currentMap[newRow, newCol].IsSolid)
             {
-                renderer.RenderBrick(currentMap[player.Position.Row, player.Position.Col], player.Position.Row, player.Position.Col);
+                renderer.RenderBrick(currentMap[playerRow, playerCol], playerRow, playerCol);
                 player.Move(direction);
                 player.Moves++;
-                SystemSounds.Asterisk.Play();
             }
         }
     }

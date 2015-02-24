@@ -2,7 +2,7 @@
 {
     using System;
 
-    class Box
+    public class Box
     {
         //TODO: Must be implemented
     }
