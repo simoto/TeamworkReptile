@@ -4,6 +4,6 @@
 
     public class MainMenu
     {
-        //TODO: Main game menu to choose start game, load game and exit
+        ////TODO: Main game menu to choose start game, load game and exit
     }
 }
