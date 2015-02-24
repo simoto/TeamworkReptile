@@ -9,124 +9,178 @@
     {
         public void ProcessInput(ConsoleKeyInfo pressedKey, Player player, ref SingleElement[,] currentMap, IRenderer renderer)
         {
+            int currentRow = player.Position.Row;
+            int currentCol = player.Position.Col;
+
+            renderer.RenderMoves(player);
+
             if (pressedKey.Key.Equals(ConsoleKey.LeftArrow))
             {
-                this.Move(0, -1, Direction.Left, player, ref currentMap, renderer);
+                Move(0, -1, Direction.Left, player, ref currentMap, renderer);
+            }
+                else if (isLeftColBox && currentMap[currentRow, currentCol - 2].IsSolid) 
+            {
+                Move(0, 1, Direction.Right, player, ref currentMap, renderer);
+            }
+                else if (isLeftColBox && currentMap[currentRow, currentCol - 2].Symbol == 'K')
+            {
+                Move(-1, 0, Direction.Up, player, ref currentMap, renderer);
+            }
+                else if (isLeftColBox && currentMap[currentRow, currentCol - 2].Symbol == ' ')
+            {
+                Move(1, 0, Direction.Down, player, ref currentMap, renderer);
+            }
+                else if (isLeftColBox && currentMap[currentRow, currentCol - 2].Symbol == '*')
+            {
+                    currentMap[currentRow, currentCol - 2].Symbol = '@';
+                    currentMap[currentRow, currentCol - 2].IsSolid = true;
+                    currentMap[currentRow, currentCol - 1].Symbol = ' ';
+
+                    renderer.RenderSingleElement(currentMap[currentRow, currentCol - 2], currentRow, currentCol - 2);
+                    renderer.RenderSingleElement(currentMap[currentRow, currentCol - 1], currentRow, currentCol - 1);
+                    renderer.RenderSingleElement(currentMap[currentRow, currentCol], currentRow, currentCol);
+
+                    player.Move(Direction.Left);
+                    player.Moves++;
+                    currentCol = player.Position.Col;
+                SystemSounds.Asterisk.Play();
+            }
+                else if (isLeftColBox && currentMap[currentRow, currentCol - 2].IsSolid)
+            {
+                    SystemSounds.Hand.Play();
+            }
+                else if (!currentMap[currentRow, currentCol - 1].IsSolid)
+            {
+                    renderer.RenderSingleElement(currentMap[currentRow, currentCol], currentRow, currentCol);
+                    player.Move(Direction.Left);
+                    player.Moves++;
+                    currentCol = player.Position.Col;
+                    SystemSounds.Asterisk.Play();
+            }
             }
             else if (pressedKey.Key.Equals(ConsoleKey.RightArrow))
             {
-                this.Move(0, 1, Direction.Right, player, ref currentMap, renderer);
+                bool isRightColBox = currentMap[currentRow, currentCol + 1].Symbol == 'K';
+
+                if (currentMap[currentRow, currentCol + 1].IsSolid)
+                {
+                    SystemSounds.Hand.Play();
+            }
+                else if (isRightColBox && currentMap[currentRow, currentCol + 2].IsSolid)
+                {
+                    SystemSounds.Hand.Play();
+        }
+                else if (isRightColBox && currentMap[currentRow, currentCol + 2].Symbol == 'K')
+                {
+                    SystemSounds.Hand.Play();
+                }
+                else if (isRightColBox && currentMap[currentRow, currentCol + 2].Symbol == ' ')
+                {
+                    currentMap[currentRow, currentCol + 2].Symbol = 'K';
+                    currentMap[currentRow, currentCol + 2].Color = ConsoleColor.Cyan;                  
+                    currentMap[currentRow, currentCol + 1].Symbol = ' ';
+
+                    renderer.RenderSingleElement(currentMap[currentRow, currentCol + 2], currentRow, currentCol + 2);
+                    renderer.RenderSingleElement(currentMap[currentRow, currentCol + 1], currentRow, currentCol + 1);
+                    renderer.RenderSingleElement(currentMap[currentRow, currentCol], currentRow, currentCol);
+
+                    player.Move(Direction.Right);
+                    player.Moves++;
+                    currentCol = player.Position.Col;
+                    SystemSounds.Asterisk.Play();
+                }
+                else if (isRightColBox && currentMap[currentRow, currentCol + 2].Symbol == '*')
+        {
+            if (currentMap[player.Position.Row + rowMove, player.Position.Col + colMove].IsSolid)
+            {
+                SystemSounds.Hand.Play();
+            }
+            else if (currentMap[player.Position.Row + rowMove, player.Position.Col + colMove].Symbol == 'K'
+                && currentMap[player.Position.Row + (2 * rowMove), player.Position.Col + (2 * colMove)].IsSolid)
+            {
+                    renderer.RenderSingleElement(currentMap[currentRow, currentCol], currentRow, currentCol);
+                    player.Move(Direction.Right);
+                    player.Moves++;
+                    currentCol = player.Position.Col;
+                    SystemSounds.Asterisk.Play();
+                }
             }
             else if (pressedKey.Key.Equals(ConsoleKey.UpArrow))
             {
-                this.Move(-1, 0, Direction.Up, player, ref currentMap, renderer);
-            }
-            else if (pressedKey.Key.Equals(ConsoleKey.DownArrow))
-            {
-                this.Move(1, 0, Direction.Down, player, ref currentMap, renderer);
-            }
-            else if (pressedKey.Key == ConsoleKey.S)
-            {
-                //// TODO ask player for pass/key
-                var password = "TODO";
+                bool isUpRowBox = currentMap[currentRow - 1, currentCol].Symbol == 'K';
 
-                SaveManager.Save(currentMap, player);
-                SystemSounds.Asterisk.Play();
-                Environment.Exit(0);
+                if (currentMap[currentRow - 1, currentCol].IsSolid)
+                {
+                    SystemSounds.Hand.Play();
+                }
+                else if (isUpRowBox && currentMap[currentRow - 2, currentCol].Symbol == 'K')
+                {
+                SystemSounds.Hand.Play();
             }
-            else if (pressedKey.Key == ConsoleKey.L)
-            {
-                ////load
-                throw new NotImplementedException();
-            }
-            else if (pressedKey.Key == ConsoleKey.R)
-            {
-                //// restart level
-                currentMap = LevelLoader.LoadLevel(player.Level);
-                MapReader.SetPlayerPossition(player, currentMap);
-                renderer.RenderMap(currentMap);
-                renderer.RenderPlayer(player);
-            }
-            else if (pressedKey.Key == ConsoleKey.N)
-            {
-                // end game, start from level 1
-                currentMap = LevelLoader.LoadLevel(1);
-                MapReader.SetPlayerPossition(player, currentMap);
-                player.Level = 1;
-                player.Moves = 0;
-                renderer.RenderMap(currentMap);
-                renderer.RenderPlayer(player);
-            }
-        }
-
-        private void Move(int rowMove, int colMove, Direction direction, Player player, ref SingleElement[,] currentMap, IRenderer renderer)
-        {
-            int newRow = player.Position.Row + rowMove;
-            int newCol = player.Position.Col + colMove;
-            int nextToNewRow = player.Position.Row + (2 * rowMove);
-            int nextToNewCol = player.Position.Col + (2 * colMove);
-            int playerRow = player.Position.Row;
-            int playerCol = player.Position.Col;
-
-            if (currentMap[newRow, newCol].IsSolid)
+            else if (currentMap[player.Position.Row + rowMove, player.Position.Col + colMove].Symbol == 'K'
+                && currentMap[player.Position.Row + (2 * rowMove), player.Position.Col + (2 * colMove)].Symbol == 'K')
             {
                 SystemSounds.Hand.Play();
             }
-            else if (currentMap[newRow, newCol].Symbol == 'K'
-                && currentMap[nextToNewRow, nextToNewCol].IsSolid)
-            {
-                //// next to K is solid
-                SystemSounds.Hand.Play();
-            }
-            else if (currentMap[newRow, newCol].Symbol == 'K'
-                && currentMap[nextToNewRow, nextToNewCol].Symbol == 'K')
-            {
-                SystemSounds.Hand.Play();
-            }
-            else if (currentMap[newRow, newCol].Symbol == 'K' && currentMap[nextToNewRow, nextToNewCol].Symbol == ' ')
+            else if (currentMap[player.Position.Row + rowMove, player.Position.Col + colMove].Symbol == 'K' && currentMap[player.Position.Row + (2 * rowMove), player.Position.Col + (2 * colMove)].Symbol == ' ')
             {
                 //// next to K is ' '
-                currentMap[nextToNewRow, nextToNewCol].Symbol = 'K';
+                currentMap[player.Position.Row + (2 * rowMove), player.Position.Col + (2 * colMove)].Symbol = 'K';
                 //// H--
-                currentMap[newRow, newCol].Symbol = ' ';
+                currentMap[player.Position.Row + rowMove, player.Position.Col + colMove].Symbol = ' ';
 
-                renderer.RenderBrick(currentMap[nextToNewRow, nextToNewCol], nextToNewRow, nextToNewCol);
+                renderer.RenderBrick(currentMap[player.Position.Row + (2 * rowMove), player.Position.Col + (2 * colMove)], player.Position.Row + (2 * rowMove), player.Position.Col + (2 * colMove));
 
-                renderer.RenderBrick(currentMap[newRow, newCol], newRow, newCol);
+                renderer.RenderBrick(currentMap[player.Position.Row + rowMove, player.Position.Col + colMove], player.Position.Row + rowMove, player.Position.Col + colMove);
 
-                renderer.RenderBrick(currentMap[playerRow, playerCol], playerRow, playerCol);
+                renderer.RenderBrick(currentMap[player.Position.Row, player.Position.Col], player.Position.Row, player.Position.Col);
 
-                player.Move(direction);
+                    player.Move(Direction.Up);
+                    player.Moves++;
+                    currentRow = player.Position.Row;
+                    SystemSounds.Asterisk.Play();
+                }
+                else if (isUpRowBox && currentMap[currentRow - 2, currentCol].IsSolid)
+                {
+                    SystemSounds.Hand.Play();
+                }
+                else if (!currentMap[currentRow - 1, currentCol].IsSolid)
+                {
+                    renderer.RenderSingleElement(currentMap[currentRow, currentCol], currentRow, currentCol);
+                    player.Move(Direction.Up);
                 player.Moves++;
+                SystemSounds.Asterisk.Play();
             }
-            else if (currentMap[newRow, newCol].Symbol == 'K' && currentMap[nextToNewRow, nextToNewCol].Symbol == '*')
+            else if (currentMap[player.Position.Row + rowMove, player.Position.Col + colMove].Symbol == 'K' && currentMap[player.Position.Row + (2 * rowMove), player.Position.Col + (2 * colMove)].Symbol == '*')
             {
                 //// next to K is *
                 ////K--
-                currentMap[nextToNewRow, nextToNewCol].Symbol = '@';
-                currentMap[nextToNewRow, nextToNewCol].IsSolid = true;
+                currentMap[player.Position.Row + (2 * rowMove), player.Position.Col + (2 * colMove)].Symbol = '@';
+                currentMap[player.Position.Row + (2 * rowMove), player.Position.Col + (2 * colMove)].IsSolid = true;
                 ////H--
-                currentMap[newRow, newCol].Symbol = ' ';
+                currentMap[player.Position.Row + rowMove, player.Position.Col + colMove].Symbol = ' ';
 
-                renderer.RenderBrick(currentMap[nextToNewRow, nextToNewCol], nextToNewRow, nextToNewCol);
+                renderer.RenderBrick(currentMap[player.Position.Row + (2 * rowMove), player.Position.Col + (2 * colMove)], player.Position.Row + (2 * rowMove), player.Position.Col + (2 * colMove));
 
-                renderer.RenderBrick(currentMap[newRow, newCol], newRow, newCol);
+                renderer.RenderBrick(currentMap[player.Position.Row + rowMove, player.Position.Col + colMove], player.Position.Row + rowMove, player.Position.Col + colMove);
 
-                renderer.RenderBrick(currentMap[playerRow, playerCol], playerRow, playerCol);
+                renderer.RenderBrick(currentMap[player.Position.Row, player.Position.Col], player.Position.Row, player.Position.Col);
 
-                player.Move(direction);
+                    player.Move(Direction.Down);
                 player.Moves++;
+                    currentRow = player.Position.Row;
                 SystemSounds.Asterisk.Play();
             }
-            else if (currentMap[newRow, newCol].Symbol == 'K' && currentMap[nextToNewRow, nextToNewCol].IsSolid)
+            else if (currentMap[player.Position.Row + rowMove, player.Position.Col + colMove].Symbol == 'K' && currentMap[player.Position.Row + (2 * rowMove), player.Position.Col + (2 * colMove)].IsSolid)
             {
                 SystemSounds.Hand.Play();
             }
-            else if (!currentMap[newRow, newCol].IsSolid)
+            else if (!currentMap[player.Position.Row + rowMove, player.Position.Col + colMove].IsSolid)
             {
-                renderer.RenderBrick(currentMap[playerRow, playerCol], playerRow, playerCol);
+                renderer.RenderBrick(currentMap[player.Position.Row, player.Position.Col], player.Position.Row, player.Position.Col);
                 player.Move(direction);
                 player.Moves++;
+                SystemSounds.Asterisk.Play();
             }
         }
     }

@@ -4,7 +4,7 @@
 
     public class MapReader
     {
-        public static void SetPlayerPossition(Player player, SingleElement[,] map)
+        public static void SetPlayerPosition(Player player, SingleElement[,] map)
         {
             for (int i = 0; i < map.GetLength(0); i++)
             {

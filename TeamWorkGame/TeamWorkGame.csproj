@@ -49,12 +49,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\ConsoleRenderer.cs" />
@@ -66,13 +61,9 @@
     <Compile Include="Data\SaveManager.cs" />
     <Compile Include="GameObjects\Participant.cs" />
     <Compile Include="GameObjects\Save.cs" />
-    <Compile Include="GameObjects\VisualElement.cs" />
-    <Compile Include="GameObjects\Box.cs" />
     <Compile Include="GameObjects\SingleElement.cs" />
     <Compile Include="GameObjects\Player.cs" />
-    <Compile Include="Interfaces\ICollidable.cs" />
     <Compile Include="Interfaces\IMovable.cs" />
-    <Compile Include="Interfaces\IRenderable.cs" />
     <Compile Include="Interfaces\IRenderer.cs" />
     <Compile Include="Interfaces\IUserInterface.cs" />
     <Compile Include="Data\Position.cs" />

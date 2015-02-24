@@ -6,13 +6,18 @@
 
     public class ConsoleRenderer : IRenderer
     {
+        private const string MenuSaveMessage = "S => Save and exit.";
+        private const string MenuLoadMessage = "L => Load previuos game.";
+        private const string MenuRestartMessage = "R => Restart level.";
+        private const string MenuNewGameMessage = "N => Start new game.";
+        private const int MenuRenderColumn = 20;
         private const ConsoleColor PlayerBackgroundColor = ConsoleColor.DarkRed;
         private const ConsoleColor PlayerColor = ConsoleColor.White;
         private const ConsoleColor BrickColor = ConsoleColor.DarkGray;
         private const ConsoleColor BackgroundColor = ConsoleColor.Black;
         private const char SymbolOfPlayer = 'H';
 
-        public void RenderBrick(SingleElement brick, int row, int col)
+        public void RenderSingleElement(SingleElement brick, int row, int col)
         {
             Console.SetCursorPosition(col, row);
             Console.ForegroundColor = brick.Color;
@@ -23,7 +28,6 @@
         {
             Console.SetCursorPosition(hero.Position.Col, hero.Position.Row);
             Console.ForegroundColor = PlayerColor;
-            Console.BackgroundColor = PlayerBackgroundColor;
             Console.Write(SymbolOfPlayer);
         }
 
@@ -36,11 +40,9 @@
             {
                 for (int col = 0; col < matrix.GetLength(1); col++)
                 {
-                    this.RenderBrick(matrix[row, col], row, col);
+                    this.RenderSingleElement(matrix[row, col], row, col);
                 }
             }
-
-            this.RenderMenu();
         }
 
         public void RenderString(string stringToWrite, ConsoleColor backgroundColor, int row, int col)
@@ -50,19 +52,24 @@
             Console.Write(stringToWrite);
         }
 
-        private void RenderMenu()
+        public void RenderInGameMenu()
         {
-            Console.SetCursorPosition(20, 3);
-            Console.WriteLine("S => Save and exit.");
+            Console.SetCursorPosition(MenuRenderColumn, 2);
+            Console.WriteLine(MenuSaveMessage);
+            Console.SetCursorPosition(MenuRenderColumn, 4);
+            Console.WriteLine(MenuLoadMessage);
+            Console.SetCursorPosition(MenuRenderColumn, 6);
+            Console.WriteLine(MenuRestartMessage);
+            Console.SetCursorPosition(MenuRenderColumn, 8);
+            Console.WriteLine(MenuNewGameMessage);
+        }
 
-            Console.SetCursorPosition(20, 5);
-            Console.WriteLine("L => Load previuos game.");
-
-            Console.SetCursorPosition(20, 7);
-            Console.WriteLine("R => Restart level.");
-
-            Console.SetCursorPosition(20, 9);
-            Console.WriteLine("N => Start new game.");
+        public void RenderMoves(Player player)
+        {
+            Console.SetCursorPosition(2, 12);
+            Console.Write("             ");
+            Console.SetCursorPosition(2, 12);
+            Console.Write("Moves: {0}", player.Moves);
         }
     }
 }
