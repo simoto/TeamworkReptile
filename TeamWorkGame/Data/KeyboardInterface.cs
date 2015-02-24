@@ -45,6 +45,7 @@
                 currentMap = LevelLoader.LoadLevel(player.Level);
                 MapReader.SetPlayerPosition(player, currentMap);
                 renderer.RenderMap(currentMap);
+                renderer.RenderInGameMenu();
                 renderer.RenderPlayer(player);
             }
             else if (pressedKey.Key == ConsoleKey.N)
@@ -55,6 +56,7 @@
                 player.Level = 1;
                 player.Moves = 0;
                 renderer.RenderMap(currentMap);
+                renderer.RenderInGameMenu();
                 renderer.RenderPlayer(player);
             }
         }
