@@ -12,6 +12,8 @@
 
         void RenderString(string stringToWrite, ConsoleColor background, int row, int col);
 
-        void RenderBrick(SingleElement element, int row, int col);
+        void RenderSingleElement(SingleElement element, int row, int col);
+
+        void RenderMenu();
     }
 }
