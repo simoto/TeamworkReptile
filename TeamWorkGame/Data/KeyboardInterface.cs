@@ -34,6 +34,7 @@
                     //// K-- is ' '
                     ////K--
                     currentMap[currentRow, currentCol - 2].Symbol = 'K';
+                    currentMap[currentRow, currentCol - 2].Color = ConsoleColor.Cyan;
                     ////H--
                     currentMap[currentRow, currentCol - 1].Symbol = ' ';
 
@@ -96,6 +97,7 @@
                 else if (isRightColBox && currentMap[currentRow, currentCol + 2].Symbol == ' ')
                 {
                     currentMap[currentRow, currentCol + 2].Symbol = 'K';
+                    currentMap[currentRow, currentCol + 2].Color = ConsoleColor.Cyan;                  
                     currentMap[currentRow, currentCol + 1].Symbol = ' ';
 
                     renderer.RenderSingleElement(currentMap[currentRow, currentCol + 2], currentRow, currentCol + 2);
@@ -154,6 +156,7 @@
                 else if (isUpRowBox && currentMap[currentRow - 2, currentCol].Symbol == ' ')
                 {
                     currentMap[currentRow - 2, currentCol].Symbol = 'K';
+                    currentMap[currentRow - 2, currentCol].Color = ConsoleColor.Cyan;
                     currentMap[currentRow - 1, currentCol].Symbol = ' ';
 
                     renderer.RenderSingleElement(currentMap[currentRow - 2, currentCol], currentRow - 2, currentCol);
@@ -212,6 +215,7 @@
                 else if (isDownRowBox && currentMap[currentRow + 2, currentCol].Symbol == ' ')
                 {
                     currentMap[currentRow + 2, currentCol].Symbol = 'K';
+                    currentMap[currentRow + 2, currentCol].Color = ConsoleColor.Cyan;
                     currentMap[currentRow + 1, currentCol].Symbol = ' ';
 
                     renderer.RenderSingleElement(currentMap[currentRow + 2, currentCol], currentRow + 2, currentCol);
