@@ -14,8 +14,6 @@
 
         void RenderSingleElement(SingleElement element, int row, int col);
 
-        void RenderInGameMenu();
-
-        void RenderMoves(Player player);
+        void RenderMenu();
     }
 }
