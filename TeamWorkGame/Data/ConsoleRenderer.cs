@@ -52,16 +52,24 @@
             Console.Write(stringToWrite);
         }
 
-        public void RenderMenu()
+        public void RenderInGameMenu()
         {
-            Console.SetCursorPosition(MenuRenderColumn, 3);
+            Console.SetCursorPosition(MenuRenderColumn, 2);
             Console.WriteLine(MenuSaveMessage);
-            Console.SetCursorPosition(MenuRenderColumn, 5);
+            Console.SetCursorPosition(MenuRenderColumn, 4);
             Console.WriteLine(MenuLoadMessage);
-            Console.SetCursorPosition(MenuRenderColumn, 7);
+            Console.SetCursorPosition(MenuRenderColumn, 6);
             Console.WriteLine(MenuRestartMessage);
-            Console.SetCursorPosition(MenuRenderColumn, 9);
+            Console.SetCursorPosition(MenuRenderColumn, 8);
             Console.WriteLine(MenuNewGameMessage);
+        }
+
+        public void RenderMoves(Player player)
+        {
+            Console.SetCursorPosition(2, 12);
+            Console.Write("             ");
+            Console.SetCursorPosition(2, 12);
+            Console.Write("Moves: {0}", player.Moves);
         }
     }
 }

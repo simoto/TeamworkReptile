@@ -12,6 +12,8 @@
             int currentRow = player.Position.Row;
             int currentCol = player.Position.Col;
 
+            renderer.RenderMoves(player);
+
             if (pressedKey.Key.Equals(ConsoleKey.LeftArrow))
             {
                 bool isLeftColBox = currentMap[currentRow, currentCol - 1].Symbol == 'K';
@@ -22,7 +24,6 @@
                 }
                 else if (isLeftColBox && currentMap[currentRow, currentCol - 2].IsSolid) 
                 {
-                    //// K , and k-- is solid
                     SystemSounds.Hand.Play();
                 }
                 else if (isLeftColBox && currentMap[currentRow, currentCol - 2].Symbol == 'K')
@@ -31,8 +32,6 @@
                 }
                 else if (isLeftColBox && currentMap[currentRow, currentCol - 2].Symbol == ' ')
                 {
-                    //// K-- is ' '
-                    ////K--
                     currentMap[currentRow, currentCol - 2].Symbol = 'K';
                     currentMap[currentRow, currentCol - 2].Color = ConsoleColor.Cyan;
                     ////H--
@@ -49,11 +48,8 @@
                 }
                 else if (isLeftColBox && currentMap[currentRow, currentCol - 2].Symbol == '*')
                 {
-                    //// k, and k-- is *
-                    ////K--
                     currentMap[currentRow, currentCol - 2].Symbol = '@';
                     currentMap[currentRow, currentCol - 2].IsSolid = true;
-                    ////H--
                     currentMap[currentRow, currentCol - 1].Symbol = ' ';
 
                     renderer.RenderSingleElement(currentMap[currentRow, currentCol - 2], currentRow, currentCol - 2);
@@ -257,7 +253,7 @@
             }
             else if (pressedKey.Key == ConsoleKey.S)
             {
-                //// TODO ask player for pass/key
+                //// TODO: ask player for pass/key
                 var password = "TODO";
 
                 SaveManager.Save(currentMap, player);
@@ -266,16 +262,17 @@
             }
             else if (pressedKey.Key == ConsoleKey.L)
             {
-                ////load
+                ////TODO: load game
                 throw new NotImplementedException();
             }
             else if (pressedKey.Key == ConsoleKey.R)
             {
-                //// restart level
+                ////TODO: restart level
                 currentMap = LevelLoader.LoadLevel(player.Level);
                 MapReader.SetPlayerPosition(player, currentMap);
                 renderer.RenderMap(currentMap);
                 renderer.RenderPlayer(player);
+                renderer.RenderInGameMenu();
             }
             else if (pressedKey.Key == ConsoleKey.N)
             {
@@ -286,6 +283,7 @@
                 player.Moves = 0;
                 renderer.RenderMap(currentMap);
                 renderer.RenderPlayer(player);
+                renderer.RenderInGameMenu();
             }
         }
     }

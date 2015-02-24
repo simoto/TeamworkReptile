@@ -37,7 +37,7 @@
             ////TODO: Render current map
             
             renderer.RenderMap(currentMap);
-            renderer.RenderMenu();
+            renderer.RenderInGameMenu();
             ////TODO: Here will be the game loop, KeyboardInterface usage
             while (true)
             {
@@ -58,10 +58,11 @@
                         player.Level = currentLevel + 1;
                         MapReader.SetPlayerPosition(player, currentMap);
                         renderer.RenderMap(currentMap);
+                        renderer.RenderInGameMenu();
                     }
                 }
 
-                ui.ProcessInput(pressedKey, player, ref currentMap, renderer);
+                ui.ProcessInput(pressedKey, player, ref currentMap, renderer);               
             }
         }
     }

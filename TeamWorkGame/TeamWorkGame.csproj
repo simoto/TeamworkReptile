@@ -61,7 +61,6 @@
     <Compile Include="Data\SaveManager.cs" />
     <Compile Include="GameObjects\Participant.cs" />
     <Compile Include="GameObjects\Save.cs" />
-    <Compile Include="GameObjects\Box.cs" />
     <Compile Include="GameObjects\SingleElement.cs" />
     <Compile Include="GameObjects\Player.cs" />
     <Compile Include="Interfaces\IMovable.cs" />
