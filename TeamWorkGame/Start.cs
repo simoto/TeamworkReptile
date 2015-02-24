@@ -38,6 +38,7 @@
             
             renderer.RenderMap(currentMap);
             renderer.RenderInGameMenu();
+            renderer.RenderMoves(player.Moves);
             ////TODO: Here will be the game loop, KeyboardInterface usage
             while (true)
             {

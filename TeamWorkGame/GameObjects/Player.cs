@@ -14,6 +14,13 @@
             this.Name = name;
             this.Password = password;
             this.Level = level;
+            this.Moves = 0;
+            this.Position = new Position(0, 0);
+        }
+
+        public Player(string name, int level, string password, int mooves) : this(name, level, password)
+        {
+            this.Moves = mooves;
             this.Position = new Position(0, 0);
         }
 

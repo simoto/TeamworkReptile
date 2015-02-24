@@ -13,6 +13,7 @@
         private const int MenuRenderColumn = 20;
         private const ConsoleColor PlayerBackgroundColor = ConsoleColor.DarkRed;
         private const ConsoleColor PlayerColor = ConsoleColor.White;
+        private const ConsoleColor MoovesColor = ConsoleColor.Red;
         private const ConsoleColor BrickColor = ConsoleColor.DarkGray;
         private const ConsoleColor BackgroundColor = ConsoleColor.Black;
         private const char SymbolOfPlayer = 'H';
@@ -64,12 +65,11 @@
             Console.WriteLine(MenuNewGameMessage);
         }
 
-        public void RenderMoves(Player player)
+        public void RenderMoves(int moves)
         {
             Console.SetCursorPosition(2, 12);
-            Console.Write(" ");
-            Console.SetCursorPosition(2, 12);
-            Console.Write("Moves: {0}", player.Moves);
+            Console.ForegroundColor = MoovesColor;
+            Console.Write("Moves: {0}", moves);
         }
     }
 }
