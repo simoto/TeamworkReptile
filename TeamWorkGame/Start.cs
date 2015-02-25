@@ -39,6 +39,7 @@
             renderer.RenderMap(currentMap);
             renderer.RenderInGameMenu();
             renderer.RenderMoves(player.Moves);
+            renderer.RenderLevel(player.Level);
             ConsoleKeyInfo pressedKey;
             ////TODO: Here will be the game loop, KeyboardInterface usage
             while (true)
@@ -62,6 +63,7 @@
                         renderer.RenderMap(currentMap);
                         renderer.RenderInGameMenu();
                         renderer.RenderMoves(player.Moves);
+                        renderer.RenderLevel(player.Level);
                     }
                 }
 

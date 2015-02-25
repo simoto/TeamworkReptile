@@ -15,6 +15,7 @@
         private const ConsoleColor PlayerBackgroundColor = ConsoleColor.DarkRed;
         private const ConsoleColor PlayerColor = ConsoleColor.White;
         private const ConsoleColor MoovesColor = ConsoleColor.Red;
+        private const ConsoleColor LevelColor = ConsoleColor.Green;
         private const ConsoleColor BrickColor = ConsoleColor.DarkGray;
         private const ConsoleColor BackgroundColor = ConsoleColor.Black;
         private const char SymbolOfPlayer = 'H';
@@ -73,6 +74,14 @@
             Console.SetCursorPosition(2, 12);
             Console.ForegroundColor = MoovesColor;
             Console.Write("Moves: {0}", moves);
+        }
+
+
+        public void RenderLevel(int level)
+        {
+            Console.SetCursorPosition(2, 14);
+            Console.ForegroundColor = LevelColor;
+            Console.Write("Level: {0}", level);
         }
     }
 }

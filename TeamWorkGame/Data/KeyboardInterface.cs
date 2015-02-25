@@ -36,7 +36,8 @@
             else if (pressedKey.Key == ConsoleKey.L)
             {
                 //// TODO
-                ////load
+                //// load
+                //// renderer.RenderLevel(player.Level);
                 throw new NotImplementedException();
             }
             else if (pressedKey.Key == ConsoleKey.R)
@@ -60,6 +61,7 @@
                 renderer.RenderInGameMenu();
                 renderer.RenderPlayer(player);
                 renderer.RenderMoves(player.Moves);
+                renderer.RenderLevel(player.Level);
             }
         }
 
