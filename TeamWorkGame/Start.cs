@@ -29,7 +29,7 @@
             
             ////TODO: MainMenu must be here with user choose
             
-            player = new Player("Bai Ivan", 1, "somePass");
+            player = new Player("BaiIvan", 1, "somePass");
             ////TODO: MapLoader loads the current map with current user
             SingleElement[,] currentMap = LevelLoader.LoadLevel(1);
             MapReader.SetPlayerPosition(player, currentMap);
