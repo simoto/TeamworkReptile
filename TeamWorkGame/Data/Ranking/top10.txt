@@ -1,6 +1,6 @@
 John 5 290
 Mark 5 300
-Bai Ivan 5 305
+BaiIvan 5 305
 Test 5 405
 Tom 4 440
 Simon 4 500
