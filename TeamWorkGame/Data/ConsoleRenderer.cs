@@ -14,6 +14,7 @@
         private const int MenuRenderColumn = 20;
         private const ConsoleColor PlayerBackgroundColor = ConsoleColor.DarkRed;
         private const ConsoleColor PlayerColor = ConsoleColor.White;
+        private const ConsoleColor UserNameColor = ConsoleColor.Blue;
         private const ConsoleColor MoovesColor = ConsoleColor.Red;
         private const ConsoleColor LevelColor = ConsoleColor.Green;
         private const ConsoleColor BrickColor = ConsoleColor.DarkGray;
@@ -69,19 +70,19 @@
             Console.WriteLine(MenuNextLevelMessage);
         }
 
-        public void RenderMoves(int moves)
+        public void RenderPlayerInfo(Player player)
         {
             Console.SetCursorPosition(2, 12);
-            Console.ForegroundColor = MoovesColor;
-            Console.Write("Moves: {0}", moves);
-        }
+            Console.ForegroundColor = UserNameColor;
+            Console.Write("Moves: {0}", player.Name);
 
-
-        public void RenderLevel(int level)
-        {
             Console.SetCursorPosition(2, 14);
             Console.ForegroundColor = LevelColor;
-            Console.Write("Level: {0}", level);
+            Console.Write("Level: {0}", player.Level);
+
+            Console.SetCursorPosition(2, 16);
+            Console.ForegroundColor = MoovesColor;
+            Console.Write("Moves: {0}", player.Moves);
         }
     }
 }

@@ -16,8 +16,6 @@
 
         void RenderInGameMenu();
 
-        void RenderMoves(int moves);
-
-        void RenderLevel(int level);
+        void RenderPlayerInfo(Player player);
     }
 }

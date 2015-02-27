@@ -48,7 +48,7 @@
                 renderer.RenderMap(currentMap);
                 renderer.RenderInGameMenu();
                 renderer.RenderPlayer(player);
-                renderer.RenderMoves(player.Moves);
+                renderer.RenderPlayerInfo(player);
             }
             else if (pressedKey.Key == ConsoleKey.N)
             {
@@ -60,8 +60,7 @@
                 renderer.RenderMap(currentMap);
                 renderer.RenderInGameMenu();
                 renderer.RenderPlayer(player);
-                renderer.RenderMoves(player.Moves);
-                renderer.RenderLevel(player.Level);
+                renderer.RenderPlayerInfo(player);
             }
         }
 
@@ -97,7 +96,7 @@
                 renderer.RenderSingleElement(currentMap[playerRow, playerCol], playerRow, playerCol);
                 player.Move(direction);
                 player.Moves++;
-                renderer.RenderMoves(player.Moves);
+                renderer.RenderPlayerInfo(player);
             }
             else if (isNearBox && currentMap[rowNextToNewRow, colNextToNewCol].Symbol == '*')
             {
@@ -111,7 +110,7 @@
 
                 player.Move(direction);
                 player.Moves++;
-                renderer.RenderMoves(player.Moves);
+                renderer.RenderPlayerInfo(player);
                 SystemSounds.Asterisk.Play();
             }
             else if (!currentMap[newRow, newCol].IsSolid)
@@ -119,7 +118,7 @@
                 renderer.RenderSingleElement(currentMap[playerRow, playerCol], playerRow, playerCol);
                 player.Move(direction);
                 player.Moves++;
-                renderer.RenderMoves(player.Moves);
+                renderer.RenderPlayerInfo(player);
             }
         }       
     }

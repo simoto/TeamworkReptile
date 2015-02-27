@@ -1,10 +1,10 @@
-John 5 50
-Mark 5 60
+John 5 290
+Mark 5 300
+Bai Ivan 5 305
 Test 5 405
-Tom 4 40
-Simon 4 42
-Samuel 3 50
-Snow 3 66
-Brandon 3 67
-Sansa 3 68
-Pesho 2 30
+Tom 4 440
+Simon 4 500
+Samuel 3 400
+Snow 3 420
+Brandon 3 440
+Sansa 3 470

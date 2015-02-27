@@ -29,7 +29,7 @@
             
             ////TODO: MainMenu must be here with user choose
             
-            player = new Player("Test", 1, "somePass");
+            player = new Player("Bai Ivan", 1, "somePass");
             ////TODO: MapLoader loads the current map with current user
             SingleElement[,] currentMap = LevelLoader.LoadLevel(1);
             MapReader.SetPlayerPosition(player, currentMap);
@@ -38,8 +38,7 @@
             
             renderer.RenderMap(currentMap);
             renderer.RenderInGameMenu();
-            renderer.RenderMoves(player.Moves);
-            renderer.RenderLevel(player.Level);
+            renderer.RenderPlayerInfo(player);
             ConsoleKeyInfo pressedKey;
             ////TODO: Here will be the game loop, KeyboardInterface usage
             while (true)
@@ -62,8 +61,7 @@
                         MapReader.SetPlayerPosition(player, currentMap);
                         renderer.RenderMap(currentMap);
                         renderer.RenderInGameMenu();
-                        renderer.RenderMoves(player.Moves);
-                        renderer.RenderLevel(player.Level);
+                        renderer.RenderPlayerInfo(player);
                     }
                 }
 
