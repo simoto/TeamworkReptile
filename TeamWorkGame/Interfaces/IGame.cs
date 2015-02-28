@@ -5,11 +5,13 @@
 
     public interface IGame
     {
+        void Init();
+
         void Move(Direction deirection);
 
-        void Save(Save save);
+        void Save();
 
-        Save Load(string userName, string password);
+        void Load(string userName, string password);
 
         void RestartLevel();
 

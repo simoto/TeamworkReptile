@@ -16,6 +16,7 @@
             this.Renderer = renderer;
             this.Player = player;
             this.Map = map;
+            Init();
         }
 
         public IRenderer Renderer
@@ -54,35 +55,51 @@
             }
         }
 
+        public void Init()
+        {
+            this.SetPlayerPosition();
+            renderer.RenderMap(this.map);
+            renderer.RenderInGameMenu();
+            renderer.RenderPlayer(this.player);
+            renderer.RenderPlayerInfo(this.player);
+        }
+
         public void Move(Direction direction)
         {
             // TODO check if ref is still needed
             if (direction == Direction.Left)
             {
-                this.Move(0, -1, Direction.Left, this.player, ref map, renderer);
+                this.Move(0, -1, Direction.Left);
             }
             else if (direction == Direction.Right)
             {
-                this.Move(0, 1, Direction.Right, player, ref map, renderer);
+                this.Move(0, 1, Direction.Right);
             }
             else if (direction == Direction.Up)
             {
-                this.Move(-1, 0, Direction.Up, player, ref map, renderer);
+                this.Move(-1, 0, Direction.Up);
             }
             else if (direction == Direction.Down)
             {
-                this.Move(1, 0, Direction.Down, player, ref map, renderer);
+                this.Move(1, 0, Direction.Down);
+            }
+
+            bool isLevelOver = CheckIfLevelIfOver();
+
+            if (isLevelOver)
+            {
+                ProcessLevel();
             }
         }
 
-        public void Save(Save save)
+        public void Save()
         {
             SaveManager.Save(this.map, this.player);
             SystemSounds.Asterisk.Play();
             Environment.Exit(0);
         }
 
-        public Save Load(string userName, string password)
+        public void Load(string userName, string password)
         {
             //TODO
             throw new System.NotImplementedException();
@@ -110,7 +127,7 @@
             renderer.RenderPlayerInfo(this.player);
         }
 
-        private void Move(int rowMove, int colMove, Direction direction, Player player, ref SingleElement[,] currentMap, IRenderer renderer)
+        private void Move(int rowMove, int colMove, Direction direction)
         {
             int playerRow = player.Position.Row;
             int playerCol = player.Position.Col;
@@ -119,52 +136,55 @@
             int rowNextToNewRow = playerRow + (2 * rowMove);
             int colNextToNewCol = playerCol + (2 * colMove);
 
-            bool isNearBox = currentMap[newRow, newCol].Symbol == 'K';
+            bool isNearBox = this.map[newRow, newCol].Symbol == 'K';
 
-            if (currentMap[newRow, newCol].IsSolid)
+            if (this.map[newRow, newCol].IsSolid)
             {
                 SystemSounds.Hand.Play();
             }
-            else if (isNearBox && (currentMap[rowNextToNewRow, colNextToNewCol].IsSolid
-                || currentMap[rowNextToNewRow, colNextToNewCol].Symbol == 'K'))
+            else if (isNearBox && (this.map[rowNextToNewRow, colNextToNewCol].IsSolid
+                || this.map[rowNextToNewRow, colNextToNewCol].Symbol == 'K'))
             {
                 //// next to K is solid or another K
                 SystemSounds.Hand.Play();
             }
-            else if (isNearBox && currentMap[rowNextToNewRow, colNextToNewCol].Symbol == ' ')
+            else if (isNearBox && this.map[rowNextToNewRow, colNextToNewCol].Symbol == ' ')
             {
-                currentMap[rowNextToNewRow, colNextToNewCol].Symbol = 'K';
-                currentMap[rowNextToNewRow, colNextToNewCol].Color = ConsoleColor.Cyan;
-                currentMap[newRow, newCol].Symbol = ' ';
+                this.map[rowNextToNewRow, colNextToNewCol].Symbol = 'K';
+                this.map[rowNextToNewRow, colNextToNewCol].Color = ConsoleColor.Cyan;
+                this.map[newRow, newCol].Symbol = ' ';
 
-                renderer.RenderSingleElement(currentMap[rowNextToNewRow, colNextToNewCol], rowNextToNewRow, colNextToNewCol);
-                renderer.RenderSingleElement(currentMap[newRow, newCol], newRow, newCol);
-                renderer.RenderSingleElement(currentMap[playerRow, playerCol], playerRow, playerCol);
-                player.Move(direction);
-                player.Moves++;
-                renderer.RenderPlayerInfo(player);
+                this.renderer.RenderSingleElement(this.map[rowNextToNewRow, colNextToNewCol], rowNextToNewRow, colNextToNewCol);
+                this.renderer.RenderSingleElement(this.map[newRow, newCol], newRow, newCol);
+                this.renderer.RenderSingleElement(this.map[playerRow, playerCol], playerRow, playerCol);
+                this.player.Move(direction);
+                this.player.Moves++;
+                this.renderer.RenderPlayer(this.player);
+                this.renderer.RenderPlayerInfo(this.player);
             }
-            else if (isNearBox && currentMap[rowNextToNewRow, colNextToNewCol].Symbol == '*')
+            else if (isNearBox && this.map[rowNextToNewRow, colNextToNewCol].Symbol == '*')
             {
-                currentMap[rowNextToNewRow, colNextToNewCol].Symbol = '@';
-                currentMap[rowNextToNewRow, colNextToNewCol].IsSolid = true;
-                currentMap[newRow, newCol].Symbol = ' ';
+                this.map[rowNextToNewRow, colNextToNewCol].Symbol = '@';
+                this.map[rowNextToNewRow, colNextToNewCol].IsSolid = true;
+                this.map[newRow, newCol].Symbol = ' ';
 
-                renderer.RenderSingleElement(currentMap[rowNextToNewRow, colNextToNewCol], rowNextToNewRow, colNextToNewCol);
-                renderer.RenderSingleElement(currentMap[newRow, newCol], newRow, newCol);
-                renderer.RenderSingleElement(currentMap[playerRow, playerCol], playerRow, playerCol);
+                this.renderer.RenderSingleElement(this.map[rowNextToNewRow, colNextToNewCol], rowNextToNewRow, colNextToNewCol);
+                this.renderer.RenderSingleElement(this.map[newRow, newCol], newRow, newCol);
+                this.renderer.RenderSingleElement(this.map[playerRow, playerCol], playerRow, playerCol);
 
-                player.Move(direction);
-                player.Moves++;
-                renderer.RenderPlayerInfo(player);
+                this.player.Move(direction);
+                this.player.Moves++;
+                this.renderer.RenderPlayer(this.player);
+                this.renderer.RenderPlayerInfo(player);
                 SystemSounds.Asterisk.Play();
             }
-            else if (!currentMap[newRow, newCol].IsSolid)
+            else if (!this.map[newRow, newCol].IsSolid)
             {
-                renderer.RenderSingleElement(currentMap[playerRow, playerCol], playerRow, playerCol);
-                player.Move(direction);
-                player.Moves++;
-                renderer.RenderPlayerInfo(player);
+                this.renderer.RenderSingleElement(this.map[playerRow, playerCol], playerRow, playerCol);
+                this.player.Move(direction);
+                this.player.Moves++;
+                this.renderer.RenderPlayer(this.player);
+                this.renderer.RenderPlayerInfo(this.player);
             }
         }
 
@@ -198,6 +218,11 @@
                 }
             }
 
+            return true;
+        }
+
+        private void ProcessLevel()
+        {
             int currentLevel = this.player.Level;
 
             if (currentLevel == 5)
@@ -209,10 +234,7 @@
             {
                 LoadNextLevel(currentLevel);
             }
-
-            return true;
         }
-
 
         private void LoadNextLevel(int currentLevel)
         {
@@ -220,9 +242,10 @@
             this.map = LevelLoader.LoadLevel(nextLevel);
             this.player.Level = nextLevel;
             this.SetPlayerPosition();
-            renderer.RenderMap(this.map);
-            renderer.RenderInGameMenu();
-            renderer.RenderPlayerInfo(this.player);
+            this.renderer.RenderMap(this.map);
+            this.renderer.RenderInGameMenu();
+            this.renderer.RenderPlayer(this.player);
+            this.renderer.RenderPlayerInfo(this.player);
         }
     }
 }
