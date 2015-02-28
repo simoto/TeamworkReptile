@@ -60,11 +60,15 @@
     <Compile Include="Data\RankingManager.cs" />
     <Compile Include="Data\SaveManager.cs" />
     <Compile Include="GameObjects\Participant.cs" />
+    <Compile Include="GameObjects\PushTheBox.cs" />
     <Compile Include="GameObjects\Save.cs" />
     <Compile Include="GameObjects\SingleElement.cs" />
     <Compile Include="GameObjects\Player.cs" />
+    <Compile Include="GameObjects\Storage.cs" />
+    <Compile Include="Interfaces\IGame.cs" />
     <Compile Include="Interfaces\IMovable.cs" />
     <Compile Include="Interfaces\IRenderer.cs" />
+    <Compile Include="Interfaces\IStorage.cs" />
     <Compile Include="Interfaces\IUserInterface.cs" />
     <Compile Include="Data\Position.cs" />
     <Compile Include="MainMenu.cs" />
