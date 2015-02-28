@@ -56,7 +56,6 @@
     <Compile Include="Data\Direction.cs" />
     <Compile Include="Data\KeyboardInterface.cs" />
     <Compile Include="Data\LevelLoader.cs" />
-    <Compile Include="Data\MapReader.cs" />
     <Compile Include="Data\RankingManager.cs" />
     <Compile Include="Data\SaveManager.cs" />
     <Compile Include="GameObjects\Participant.cs" />
