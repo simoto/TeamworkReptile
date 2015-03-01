@@ -10,8 +10,9 @@
         private const string MenuLoadMessage = "L => Load previuos game.";
         private const string MenuRestartMessage = "R => Restart level.";
         private const string MenuNewGameMessage = "N => Start new game.";
-        private const string MenuNextLevelMessage = "Space => Start next level.";
+        private const string GameOverMessage = "GAME OVER";
         private const int MenuRenderColumn = 20;
+        private const int GameOverMessageColumn = 25;
         private const ConsoleColor PlayerBackgroundColor = ConsoleColor.DarkRed;
         private const ConsoleColor PlayerColor = ConsoleColor.White;
         private const ConsoleColor UserNameColor = ConsoleColor.Blue;
@@ -19,6 +20,7 @@
         private const ConsoleColor LevelColor = ConsoleColor.Green;
         private const ConsoleColor BrickColor = ConsoleColor.DarkGray;
         private const ConsoleColor BackgroundColor = ConsoleColor.Black;
+        private const ConsoleColor GameOverMessageColor = ConsoleColor.Red;
         private const char SymbolOfPlayer = 'H';
 
         public void RenderSingleElement(SingleElement brick, int row, int col)
@@ -66,8 +68,6 @@
             Console.WriteLine(MenuRestartMessage);
             Console.SetCursorPosition(MenuRenderColumn, 8);
             Console.WriteLine(MenuNewGameMessage);
-            Console.SetCursorPosition(MenuRenderColumn, 10);
-            Console.WriteLine(MenuNextLevelMessage);
         }
 
         public void RenderPlayerInfo(Player player)
@@ -83,6 +83,14 @@
             Console.SetCursorPosition(2, 16);
             Console.ForegroundColor = MoovesColor;
             Console.Write("Moves: {0}", player.Moves);
+        }
+
+
+        public void RenderGameOver()
+        {
+            Console.SetCursorPosition(GameOverMessageColumn, 15);
+            Console.ForegroundColor = GameOverMessageColor;
+            Console.WriteLine(GameOverMessage);
         }
     }
 }

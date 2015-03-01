@@ -229,6 +229,7 @@
             {
                 //TODO
                 //RankingManager.Save(this.player);
+                this.renderer.RenderGameOver();
             }
             else
             {

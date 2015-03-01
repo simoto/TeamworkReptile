@@ -17,5 +17,7 @@
         void RenderInGameMenu();
 
         void RenderPlayerInfo(Player player);
+
+        void RenderGameOver();
     }
 }
