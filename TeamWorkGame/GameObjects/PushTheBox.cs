@@ -97,9 +97,16 @@
 
         public void Save(IStorage storage)
         {
-            storage.Save(this);
-            SystemSounds.Asterisk.Play();
-            Environment.Exit(0);
+            bool isSaved = storage.Save(this);
+            if (isSaved)
+            {
+                SystemSounds.Asterisk.Play();
+                Environment.Exit(0);
+            }
+            else
+            {
+                //TODO not saved message
+            }
         }
 
         public void Load(IStorage storage, string gameName, string userName, string password)
