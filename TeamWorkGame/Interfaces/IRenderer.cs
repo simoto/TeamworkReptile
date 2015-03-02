@@ -1,10 +1,11 @@
 ﻿namespace TeamWorkGame.Interfaces
 {
     using System;
+    using System.ComponentModel;
     using TeamWorkGame.Data;
     using TeamWorkGame.GameObjects;
 
-    public interface IRenderer
+    public interface IRenderer : INotifyPropertyChanged
     {
         void RenderPlayer(Player hero);
 

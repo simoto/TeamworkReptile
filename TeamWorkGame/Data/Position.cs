@@ -1,6 +1,10 @@
 ﻿namespace TeamWorkGame.Data
 {
-    public class Position
+    using System;
+    using System.ComponentModel;
+
+    [Serializable()]
+    public class Position : INotifyPropertyChanged
     {
         public Position(int row, int col)
         {
@@ -11,5 +15,7 @@
         public int Row { get; set; }
 
         public int Col { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

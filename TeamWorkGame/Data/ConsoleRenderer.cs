@@ -1,9 +1,11 @@
 ﻿namespace TeamWorkGame.Data
 {
     using System;
+    using System.ComponentModel;
     using TeamWorkGame.GameObjects;
     using TeamWorkGame.Interfaces;
 
+    [Serializable()]
     public class ConsoleRenderer : IRenderer
     {
         private const string MenuSaveMessage = "S => Save and exit.";
@@ -98,5 +100,7 @@
         {
             throw new NotImplementedException();
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

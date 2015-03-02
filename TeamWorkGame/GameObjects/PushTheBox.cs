@@ -1,10 +1,12 @@
 ﻿namespace TeamWorkGame.GameObjects
 {
     using System;
+    using System.ComponentModel;
     using System.Media;
     using TeamWorkGame.Data;
     using TeamWorkGame.Interfaces;
 
+    [Serializable()]
     public class PushTheBox : IGame
     {
         private IRenderer renderer;
@@ -94,15 +96,21 @@
 
         public void Save()
         {
-            SaveManager.Save(this.map, this.player);
+            //SaveManager.Save(this.map, this.player);
+            var storage = new Storage();
+            storage.Save(this);
             SystemSounds.Asterisk.Play();
             Environment.Exit(0);
         }
 
         public void Load(string userName, string password)
         {
-            //TODO
-            throw new System.NotImplementedException();
+            var storage = new Storage();
+            PushTheBox game = (PushTheBox)storage.Load(player.Name, player.Password);
+            this.renderer = game.renderer;
+            this.player = game.player;
+            this.map = game.map;
+            Init();
         }
 
         public void RestartLevel()
@@ -248,5 +256,7 @@
             this.renderer.RenderPlayer(this.player);
             this.renderer.RenderPlayerInfo(this.player);
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

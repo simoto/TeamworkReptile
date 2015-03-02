@@ -1,9 +1,12 @@
 ﻿namespace TeamWorkGame.GameObjects
 {
+    using System;
+    using System.ComponentModel;
     using TeamWorkGame.Data;
     using TeamWorkGame.Interfaces;
 
-    public class Player : IMovable
+    [Serializable()]
+    public class Player : IMovable, INotifyPropertyChanged
     {
         public Player()
         {
@@ -54,5 +57,7 @@
                     break;
             }
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

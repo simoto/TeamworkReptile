@@ -1,8 +1,10 @@
 ﻿namespace TeamWorkGame.GameObjects
 {
     using System;
+    using System.ComponentModel;
 
-    public class SingleElement
+    [Serializable()]
+    public class SingleElement : INotifyPropertyChanged
     {
         private char symbol;
 
@@ -37,5 +39,7 @@
                 }               
             }
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

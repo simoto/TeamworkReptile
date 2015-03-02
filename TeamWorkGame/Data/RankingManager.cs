@@ -72,12 +72,23 @@
                                 .ThenBy(p => p.Moves)
                                 .Take(10);
 
-            using (StreamWriter sw = new StreamWriter(FilePath))
+            try
             {
-                foreach (var player in finalRanking)
+                using (StreamWriter sw = new StreamWriter(FilePath))
                 {
-                    sw.WriteLine("{0} {1} {2}", player.Name, player.Level, player.Moves);
+                    foreach (var player in finalRanking)
+                    {
+                        sw.WriteLine("{0} {1} {2}", player.Name, player.Level, player.Moves);
+                    }
                 }
+            }
+            catch (FileNotFoundException ex)
+            {
+                throw new FileNotFoundException("Error: Could not read file from disk. Original error: " + ex.Message);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error: Something went wrong. Original error: " + ex.Message);
             }
         }
     }
