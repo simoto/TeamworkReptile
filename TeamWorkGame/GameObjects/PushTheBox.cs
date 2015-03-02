@@ -6,10 +6,10 @@
     using TeamWorkGame.Data;
     using TeamWorkGame.Interfaces;
 
-    [Serializable()]
+    [Serializable]
     public class PushTheBox : IGame
     {
-        public string gameName = "PushTheBox";
+        private string gameName = "PushTheBox";
         private IRenderer renderer;
         private Player player;
         private SingleElement[,] map;
@@ -19,8 +19,10 @@
             this.Renderer = renderer;
             this.Player = player;
             this.Map = map;
-            Init();
+            this.Init();
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public IRenderer Renderer
         {
@@ -28,6 +30,7 @@
             {
                 return this.renderer;
             }
+
             set
             {
                 this.renderer = value;
@@ -40,9 +43,18 @@
             {
                 return this.player;
             }
+
             set
             {
                 this.player = value;
+            }
+        }
+
+        public string GameName
+        {
+            get
+            {
+                return this.gameName;
             }
         }
 
@@ -52,6 +64,7 @@
             {
                 return this.map;
             }
+
             set
             {
                 this.map = value;
@@ -61,10 +74,10 @@
         public void Init()
         {
             this.SetPlayerPosition();
-            renderer.RenderMap(this.map);
-            renderer.RenderInGameMenu();
-            renderer.RenderPlayer(this.player);
-            renderer.RenderPlayerInfo(this.player);
+            this.renderer.RenderMap(this.map);
+            this.renderer.RenderInGameMenu();
+            this.renderer.RenderPlayer(this.player);
+            this.renderer.RenderPlayerInfo(this.player);
         }
 
         public void Move(Direction direction)
@@ -87,11 +100,11 @@
                 this.Move(1, 0, Direction.Down);
             }
 
-            bool isLevelOver = CheckIfLevelIfOver();
+            bool isLevelOver = this.CheckIfLevelIfOver();
 
             if (isLevelOver)
             {
-                ProcessLevel();
+                this.ProcessLevel();
             }
         }
 
@@ -105,7 +118,7 @@
             }
             else
             {
-                //TODO not saved message
+                // TODO not saved message
             }
         }
 
@@ -117,7 +130,7 @@
                 this.renderer = game.renderer;
                 this.player = game.player;
                 this.map = game.map;
-                Init();
+                this.Init();
             }
             else
             {
@@ -129,36 +142,28 @@
         {
             this.map = LevelLoader.LoadLevel(this.player.Level);
             this.SetPlayerPosition();
-            renderer.RenderMap(this.map);
-            renderer.RenderInGameMenu();
-            renderer.RenderPlayer(this.player);
-            renderer.RenderPlayerInfo(this.player);
+            this.renderer.RenderMap(this.map);
+            this.renderer.RenderInGameMenu();
+            this.renderer.RenderPlayer(this.player);
+            this.renderer.RenderPlayerInfo(this.player);
         }
 
         public void StartNewGame()
         {
             this.map = LevelLoader.LoadLevel(1);
             this.SetPlayerPosition();
-            player.Level = 1;
-            player.Moves = 0;
-            renderer.RenderMap(this.map);
-            renderer.RenderInGameMenu();
-            renderer.RenderPlayer(this.player);
-            renderer.RenderPlayerInfo(this.player);
-        }
-
-        public string GameName 
-        { 
-            get 
-            {
-                return this.gameName;
-            }
+            this.player.Level = 1;
+            this.player.Moves = 0;
+            this.renderer.RenderMap(this.map);
+            this.renderer.RenderInGameMenu();
+            this.renderer.RenderPlayer(this.player);
+            this.renderer.RenderPlayerInfo(this.player);
         }
 
         private void Move(int rowMove, int colMove, Direction direction)
         {
-            int playerRow = player.Position.Row;
-            int playerCol = player.Position.Col;
+            int playerRow = this.player.Position.Row;
+            int playerCol = this.player.Position.Col;
             int newRow = playerRow + rowMove;
             int newCol = playerCol + colMove;
             int rowNextToNewRow = playerRow + (2 * rowMove);
@@ -203,7 +208,7 @@
                 this.player.Move(direction);
                 this.player.Moves++;
                 this.renderer.RenderPlayer(this.player);
-                this.renderer.RenderPlayerInfo(player);
+                this.renderer.RenderPlayerInfo(this.player);
                 SystemSounds.Asterisk.Play();
             }
             else if (!this.map[newRow, newCol].IsSolid)
@@ -255,13 +260,13 @@
 
             if (currentLevel == 5)
             {
-                //TODO
-                //RankingManager.Save(this.player);
+                // TODO
+                // RankingManager.Save(this.player);
                 this.renderer.RenderGameOver();
             }
             else
             {
-                LoadNextLevel(currentLevel);
+                this.LoadNextLevel(currentLevel);
             }
         }
 
@@ -276,7 +281,5 @@
             this.renderer.RenderPlayer(this.player);
             this.renderer.RenderPlayerInfo(this.player);
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

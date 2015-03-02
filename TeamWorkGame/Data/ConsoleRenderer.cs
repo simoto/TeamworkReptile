@@ -5,7 +5,7 @@
     using TeamWorkGame.GameObjects;
     using TeamWorkGame.Interfaces;
 
-    [Serializable()]
+    [Serializable]
     public class ConsoleRenderer : IRenderer
     {
         private const string MenuSaveMessage = "S => Save and exit.";
@@ -24,6 +24,8 @@
         private const ConsoleColor BackgroundColor = ConsoleColor.Black;
         private const ConsoleColor GameOverMessageColor = ConsoleColor.Red;
         private const char SymbolOfPlayer = 'H';
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public void RenderSingleElement(SingleElement brick, int row, int col)
         {
@@ -87,7 +89,6 @@
             Console.Write("Moves: {0}", player.Moves);
         }
 
-
         public void RenderGameOver()
         {
             Console.SetCursorPosition(GameOverMessageColumn, 10);
@@ -95,12 +96,9 @@
             Console.WriteLine(GameOverMessage);
         }
 
-
         public void RenderRanking()
         {
             throw new NotImplementedException();
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

@@ -3,7 +3,7 @@
     using System;
     using System.ComponentModel;
 
-    [Serializable()]
+    [Serializable]
     public class SingleElement : INotifyPropertyChanged
     {
         private char symbol;
@@ -14,6 +14,8 @@
             this.Symbol = symbol;
             this.IsSolid = isSolid;
         }
+        
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public ConsoleColor Color { get; set; }
 
@@ -39,7 +41,5 @@
                 }               
             }
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

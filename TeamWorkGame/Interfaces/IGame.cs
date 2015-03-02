@@ -7,6 +7,10 @@ using TeamWorkGame.GameObjects;
 
     public interface IGame : INotifyPropertyChanged
     {
+        Player Player { get; set; }
+
+        string GameName { get; }
+
         void Init();
 
         void Move(Direction deirection);
@@ -18,9 +22,5 @@ using TeamWorkGame.GameObjects;
         void RestartLevel();
 
         void StartNewGame();
-
-        Player Player { get; set; }
-
-        string GameName { get;}
     }
 }

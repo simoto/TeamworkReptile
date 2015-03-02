@@ -5,7 +5,7 @@
     using TeamWorkGame.Data;
     using TeamWorkGame.Interfaces;
 
-    [Serializable()]
+    [Serializable]
     public class Player : IMovable, INotifyPropertyChanged
     {
         public Player()
@@ -26,6 +26,8 @@
             this.Moves = mooves;
             this.Position = new Position(0, 0);
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public string Name { get; set; }
 
@@ -57,7 +59,5 @@
                     break;
             }
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

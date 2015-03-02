@@ -11,37 +11,37 @@
 
         public void ProcessInput(IGame currentGame, IStorage storage)
         {
-            pressedKey = Console.ReadKey();
+            this.pressedKey = Console.ReadKey();
 
-            if (pressedKey.Key.Equals(ConsoleKey.LeftArrow))
+            if (this.pressedKey.Key.Equals(ConsoleKey.LeftArrow))
             {
                 currentGame.Move(Direction.Left);
             }
-            else if (pressedKey.Key.Equals(ConsoleKey.RightArrow))
+            else if (this.pressedKey.Key.Equals(ConsoleKey.RightArrow))
             {
                 currentGame.Move(Direction.Right);
             }
-            else if (pressedKey.Key.Equals(ConsoleKey.UpArrow))
+            else if (this.pressedKey.Key.Equals(ConsoleKey.UpArrow))
             {
                 currentGame.Move(Direction.Up);
             }
-            else if (pressedKey.Key.Equals(ConsoleKey.DownArrow))
+            else if (this.pressedKey.Key.Equals(ConsoleKey.DownArrow))
             {
                 currentGame.Move(Direction.Down);
             }
-            else if (pressedKey.Key == ConsoleKey.S)
+            else if (this.pressedKey.Key == ConsoleKey.S)
             {
                 currentGame.Save(storage);
             }
-            else if (pressedKey.Key == ConsoleKey.L)
+            else if (this.pressedKey.Key == ConsoleKey.L)
             {
                 currentGame.Load(storage, currentGame.GameName, currentGame.Player.Name, currentGame.Player.Password);
             }
-            else if (pressedKey.Key == ConsoleKey.R)
+            else if (this.pressedKey.Key == ConsoleKey.R)
             {
                 currentGame.RestartLevel();
             }
-            else if (pressedKey.Key == ConsoleKey.N)
+            else if (this.pressedKey.Key == ConsoleKey.N)
             {
                 currentGame.StartNewGame();
             }
