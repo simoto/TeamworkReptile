@@ -12,7 +12,7 @@
         private const string MenuNewGameMessage = "N => Start new game.";
         private const string GameOverMessage = "GAME OVER";
         private const int MenuRenderColumn = 20;
-        private const int GameOverMessageColumn = 25;
+        private const int GameOverMessageColumn = 20;
         private const ConsoleColor PlayerBackgroundColor = ConsoleColor.DarkRed;
         private const ConsoleColor PlayerColor = ConsoleColor.White;
         private const ConsoleColor UserNameColor = ConsoleColor.Blue;
@@ -88,9 +88,15 @@
 
         public void RenderGameOver()
         {
-            Console.SetCursorPosition(GameOverMessageColumn, 15);
+            Console.SetCursorPosition(GameOverMessageColumn, 10);
             Console.ForegroundColor = GameOverMessageColor;
             Console.WriteLine(GameOverMessage);
+        }
+
+
+        public void RenderRanking()
+        {
+            throw new NotImplementedException();
         }
     }
 }

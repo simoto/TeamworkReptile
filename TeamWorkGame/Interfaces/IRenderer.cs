@@ -19,5 +19,7 @@
         void RenderPlayerInfo(Player player);
 
         void RenderGameOver();
+
+        void RenderRanking();
     }
 }
