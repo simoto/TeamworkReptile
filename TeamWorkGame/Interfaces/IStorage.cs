@@ -4,6 +4,6 @@
     {
         void Save(IGame game);
 
-        IGame Load(string userName, string password);
+        IGame Load(string gameName, string userName, string password);
     }
 }

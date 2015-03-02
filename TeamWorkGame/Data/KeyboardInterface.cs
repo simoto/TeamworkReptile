@@ -9,7 +9,7 @@
     {
         private ConsoleKeyInfo pressedKey;
 
-        public void ProcessInput(IGame currentGame)
+        public void ProcessInput(IGame currentGame, IStorage storage)
         {
             pressedKey = Console.ReadKey();
 
@@ -31,14 +31,11 @@
             }
             else if (pressedKey.Key == ConsoleKey.S)
             {
-                currentGame.Save();
+                currentGame.Save(storage);
             }
             else if (pressedKey.Key == ConsoleKey.L)
             {
-                //TODO
-                string userName = "BaiIvan";
-                String password = "swordfish";
-                currentGame.Load(userName, password);
+                currentGame.Load(storage, currentGame.GameName, currentGame.Player.Name, currentGame.Player.Password);
             }
             else if (pressedKey.Key == ConsoleKey.R)
             {

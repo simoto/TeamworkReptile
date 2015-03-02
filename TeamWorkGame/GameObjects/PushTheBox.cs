@@ -9,6 +9,7 @@
     [Serializable()]
     public class PushTheBox : IGame
     {
+        public string gameName = "PushTheBox";
         private IRenderer renderer;
         private Player player;
         private SingleElement[,] map;
@@ -94,23 +95,27 @@
             }
         }
 
-        public void Save()
+        public void Save(IStorage storage)
         {
-            //SaveManager.Save(this.map, this.player);
-            var storage = new Storage();
             storage.Save(this);
             SystemSounds.Asterisk.Play();
             Environment.Exit(0);
         }
 
-        public void Load(string userName, string password)
+        public void Load(IStorage storage, string gameName, string userName, string password)
         {
-            var storage = new Storage();
-            PushTheBox game = (PushTheBox)storage.Load(player.Name, player.Password);
-            this.renderer = game.renderer;
-            this.player = game.player;
-            this.map = game.map;
-            Init();
+            PushTheBox game = (PushTheBox)storage.Load(gameName, userName, password);
+            if (game != null)
+            {
+                this.renderer = game.renderer;
+                this.player = game.player;
+                this.map = game.map;
+                Init();
+            }
+            else
+            {
+                // TODO error message
+            }
         }
 
         public void RestartLevel()
@@ -133,6 +138,14 @@
             renderer.RenderInGameMenu();
             renderer.RenderPlayer(this.player);
             renderer.RenderPlayerInfo(this.player);
+        }
+
+        public string GameName 
+        { 
+            get 
+            {
+                return this.gameName;
+            }
         }
 
         private void Move(int rowMove, int colMove, Direction direction)

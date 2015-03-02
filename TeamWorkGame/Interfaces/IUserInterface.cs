@@ -5,6 +5,6 @@
 
     public interface IUserInterface
     {
-        void ProcessInput(IGame currentGame);
+        void ProcessInput(IGame currentGame, IStorage storage);
     }
 }

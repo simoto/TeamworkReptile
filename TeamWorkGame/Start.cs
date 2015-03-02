@@ -15,6 +15,7 @@
         private static Player player;
         private static IUserInterface ui;
         private static List<Participant> ranking;
+        private static IStorage storage = new Storage();
 
         internal static void Main()
         {
@@ -35,7 +36,7 @@
 
             while (true)
             {
-                ui.ProcessInput(currentGame);
+                ui.ProcessInput(currentGame, storage);
             }
         }
     }

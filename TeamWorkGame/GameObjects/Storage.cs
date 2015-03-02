@@ -9,17 +9,19 @@
         public void Save(IGame game)
         {
             string fileName = game.Player.Name + "&" + game.Player.Password + ".bin";
-            string fileNameAndDirectory = @"../../Data/Saves/" + fileName;
+            string subDirectory = game.GameName + "/";
+            string fileNameAndDirectory = @"../../Data/Saves/" + subDirectory + fileName;
             Stream stream = File.Create(fileNameAndDirectory);
             BinaryFormatter serializer = new BinaryFormatter();
             serializer.Serialize(stream, game);
             stream.Close();
         }
 
-        public IGame Load(string userName, string password)
+        public IGame Load(string gameName, string userName, string password)
         {
             string fileName = userName + "&" + password + ".bin";
-            string fileNameAndDirectory = @"../../Data/Saves/" + fileName;
+            string subDirectory = gameName + "/";
+            string fileNameAndDirectory = @"../../Data/Saves/" + subDirectory + fileName;
             if (File.Exists(fileNameAndDirectory))
             {
                 Stream stream = File.OpenRead(fileNameAndDirectory);

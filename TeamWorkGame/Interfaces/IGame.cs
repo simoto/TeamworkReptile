@@ -11,14 +11,16 @@ using TeamWorkGame.GameObjects;
 
         void Move(Direction deirection);
 
-        void Save();
+        void Save(IStorage storage);
 
-        void Load(string userName, string password);
+        void Load(IStorage storage, string gameName, string userName, string password);
 
         void RestartLevel();
 
         void StartNewGame();
 
         Player Player { get; set; }
+
+        string GameName { get;}
     }
 }
