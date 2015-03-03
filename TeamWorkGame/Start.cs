@@ -8,13 +8,12 @@
 
     internal class Start
     {
-        private const int Height = 30;
+        private const int Height = 35;
         private const int Width = 55;
         private const string Title = "ReptileMovingBox";
         private static IRenderer renderer;
         private static Player player;
         private static IUserInterface ui;
-        private static List<Participant> ranking;
         private static IStorage storage = new Storage();
 
         internal static void Main()
@@ -24,7 +23,6 @@
             Console.WindowWidth = Width;
 
             ui = new KeyboardInterface();
-            ranking = RankingManager.Load();
             renderer = new ConsoleRenderer();
             ////TODO: Here is the start point of the game
             

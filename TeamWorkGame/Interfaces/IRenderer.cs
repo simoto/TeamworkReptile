@@ -1,6 +1,7 @@
 ﻿namespace TeamWorkGame.Interfaces
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel;
     using TeamWorkGame.Data;
     using TeamWorkGame.GameObjects;
@@ -19,6 +20,6 @@
 
         void RenderPlayerInfo(Player player);
 
-        void RenderGameOver();
+        void RenderGameOver(List<Participant> participants);
     }
 }

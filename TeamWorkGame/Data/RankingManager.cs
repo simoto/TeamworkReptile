@@ -10,8 +10,52 @@
     {
         private const string FilePath = @"../../Data/Ranking/top10.txt";
         private const int RankingSize = 10;
+                
+        public static List<Participant> Save(Participant participant)
+        {
+            List<Participant> participants = Load();
 
-        public static List<Participant> Load(int rankingSize = RankingSize)
+            bool hasTenPlayers = participants.Count == RankingSize;
+            bool isLastPlayerLevelBigger = participants.Last().Level > participant.Level;
+            bool hasEqualLevelButMoreMoves = participants.Last().Level == participant.Level && participants.Last().Moves < participant.Moves;
+
+            if (hasTenPlayers
+                && (isLastPlayerLevelBigger
+                    || hasEqualLevelButMoreMoves))
+            {
+                return participants;
+            }
+
+            participants.Add(participant);
+
+            List<Participant> finalRanking = participants.OrderByDescending(p => p.Level)
+                                .ThenBy(p => p.Moves)
+                                .Take(10)
+                                .ToList();
+
+            try
+            {
+                using (StreamWriter sw = new StreamWriter(FilePath))
+                {
+                    foreach (var player in finalRanking)
+                    {
+                        sw.WriteLine("{0} {1} {2}", player.Name, player.Level, player.Moves);
+                    }
+                }
+            }
+            catch (FileNotFoundException ex)
+            {
+                throw new FileNotFoundException("Error: Could not read file from disk. Original error: " + ex.Message);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error: Something went wrong. Original error: " + ex.Message);
+            }
+
+            return finalRanking;
+        }
+
+        private static List<Participant> Load(int rankingSize = RankingSize)
         {
             StreamReader reader = null;
             var ranking = new List<Participant>();
@@ -51,45 +95,6 @@
             }
 
             return ranking;
-        }
-
-        public static void Save(List<Participant> participants, Participant participant)
-        {
-            bool hasTenPlayers = participants.Count == RankingSize;
-            bool isLastPlayerLevelBigger = participants.Last().Level > participant.Level;
-            bool hasEqualLevelButMoreMoves = participants.Last().Level == participant.Level && participants.Last().Moves < participant.Moves;
-
-            if (hasTenPlayers
-                && (isLastPlayerLevelBigger
-                    || hasEqualLevelButMoreMoves))
-            {
-                return;
-            }
-
-            participants.Add(participant);
-
-            var finalRanking = participants.OrderByDescending(p => p.Level)
-                                .ThenBy(p => p.Moves)
-                                .Take(10);
-
-            try
-            {
-                using (StreamWriter sw = new StreamWriter(FilePath))
-                {
-                    foreach (var player in finalRanking)
-                    {
-                        sw.WriteLine("{0} {1} {2}", player.Name, player.Level, player.Moves);
-                    }
-                }
-            }
-            catch (FileNotFoundException ex)
-            {
-                throw new FileNotFoundException("Error: Could not read file from disk. Original error: " + ex.Message);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Error: Something went wrong. Original error: " + ex.Message);
-            }
         }
     }
 }

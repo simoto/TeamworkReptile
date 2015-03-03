@@ -1,6 +1,7 @@
 ﻿namespace TeamWorkGame.GameObjects
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel;
     using System.Media;
     using TeamWorkGame.Data;
@@ -265,9 +266,7 @@
 
             if (currentLevel == 5)
             {
-                // TODO
-                // RankingManager.Save(this.player);
-                this.renderer.RenderGameOver();
+                this.EvalRanking();
             }
             else
             {
@@ -285,6 +284,13 @@
             this.renderer.RenderInGameMenu();
             this.renderer.RenderPlayer(this.player);
             this.renderer.RenderPlayerInfo(this.player);
+        }
+
+        private void EvalRanking()
+        {
+            Participant participant = new Participant(this.player.Name, this.player.Level, this.player.Moves);
+            List<Participant> ranking = RankingManager.Save(participant);
+            this.renderer.RenderGameOver(ranking);
         }
     }
 }

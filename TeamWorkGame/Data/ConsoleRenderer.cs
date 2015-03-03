@@ -1,6 +1,7 @@
 ﻿namespace TeamWorkGame.Data
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel;
     using TeamWorkGame.GameObjects;
     using TeamWorkGame.Interfaces;
@@ -20,6 +21,8 @@
         private const int PlayerInfoStartRow = 1;
         private const int GameOverLabbelColumn = 12;
         private const int GameOverLabbelRow = 7;
+        private const int RankingStartColumn = 2;
+        private const int RankingRow = 12;
         private const ConsoleColor PlayerBackgroundColor = ConsoleColor.DarkRed;
         private const ConsoleColor PlayerColor = ConsoleColor.White;
         private const ConsoleColor UserNameColor = ConsoleColor.Blue;
@@ -28,6 +31,7 @@
         private const ConsoleColor BrickColor = ConsoleColor.DarkGray;
         private const ConsoleColor BackgroundColor = ConsoleColor.Black;
         private const ConsoleColor GameOverLabbelColor = ConsoleColor.Red;
+        private const ConsoleColor RankingLabbelColor = ConsoleColor.Red;
         private const char SymbolOfPlayer = 'H';
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -104,17 +108,30 @@
             Console.Write("Moves: {0}", player.Moves);
         }
 
-        public void RenderGameOver()
+        public void RenderGameOver(List<Participant> participants)
         {
             Console.SetCursorPosition(GameOverLabbelColumn, GameOverLabbelRow);
             Console.ForegroundColor = GameOverLabbelColor;
             Console.Write(MenuGameOverLabel);
-            this.RenderRanking();
+            this.RenderRanking(participants);
         }
 
-        private void RenderRanking()
+        private void RenderRanking(List<Participant> participants)
         {
-            throw new NotImplementedException();
+            int row = RankingRow;
+            Console.SetCursorPosition(RankingStartColumn, row);
+            Console.ForegroundColor = RankingLabbelColor;
+            Console.Write("=========RANKING=========");
+            row += 2;
+            Console.SetCursorPosition(RankingStartColumn, row);
+            Console.Write("# \t Name \t\tLevel \t\tMoves");
+            for (int i = 0; i < participants.Count; i++)
+            {
+                var user = participants[i];
+                row += 2;
+                Console.SetCursorPosition(RankingStartColumn, row);
+                Console.Write("{0}. \t{1} \t\t{2} \t\t{3}", i + 1, user.Name, user.Level, user.Moves);
+            }
         }
     }
 }
