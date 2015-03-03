@@ -28,7 +28,7 @@
             
             ////TODO: MainMenu must be here with user choose
             
-            player = new Player("BaiIvan", 1, "somePass");
+            player = new Player("Ivan", 1, "somePass");
             SingleElement[,] currentMap = LevelLoader.LoadLevel(1);
             PushTheBox currentGame = new PushTheBox(renderer, player, currentMap);
 

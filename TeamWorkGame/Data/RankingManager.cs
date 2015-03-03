@@ -10,25 +10,31 @@
     {
         private const string FilePath = @"../../Data/Ranking/top10.txt";
         private const int RankingSize = 10;
+        private static List<Participant> ranking;
                 
         public static List<Participant> Save(Participant participant)
         {
-            List<Participant> participants = Load();
+            ranking = Load();
 
-            bool hasTenPlayers = participants.Count == RankingSize;
-            bool isLastPlayerLevelBigger = participants.Last().Level > participant.Level;
-            bool hasEqualLevelButMoreMoves = participants.Last().Level == participant.Level && participants.Last().Moves < participant.Moves;
+            bool hasTenPlayers = ranking.Count == RankingSize;
+            bool isLastPlayerLevelBigger = ranking.Last().Level > participant.Level;
+            bool hasEqualLevelButMoreMoves = ranking.Last().Level == participant.Level && ranking.Last().Moves < participant.Moves;
 
             if (hasTenPlayers
                 && (isLastPlayerLevelBigger
                     || hasEqualLevelButMoreMoves))
             {
-                return participants;
+                return ranking;
             }
 
-            participants.Add(participant);
+            bool isReplaced = ReplaceIfPlayerIsInTheRanking(participant);
 
-            List<Participant> finalRanking = participants.OrderByDescending(p => p.Level)
+            if (isReplaced == false)
+            {
+                ranking.Add(participant);
+            }
+
+            List<Participant> finalRanking = ranking.OrderByDescending(p => p.Level)
                                 .ThenBy(p => p.Moves)
                                 .Take(10)
                                 .ToList();
@@ -95,6 +101,25 @@
             }
 
             return ranking;
+        }
+
+        private static bool ReplaceIfPlayerIsInTheRanking(Participant newParticipant)
+        {
+            foreach (var participant in ranking)
+            {
+                if (newParticipant.Name == participant.Name && newParticipant.Moves < participant.Moves)
+                {
+                    ranking.Remove(participant);
+                    ranking.Add(newParticipant);
+                    return true;
+                }
+                else if (newParticipant.Name == participant.Name)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }
