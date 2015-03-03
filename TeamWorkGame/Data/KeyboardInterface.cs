@@ -33,6 +33,10 @@
             {
                 currentGame.Save(storage);
             }
+            else if (this.pressedKey.Key == ConsoleKey.E)
+            {
+                currentGame.Exit();
+            }
             else if (this.pressedKey.Key == ConsoleKey.L)
             {
                 currentGame.Load(storage, currentGame.GameName, currentGame.Player.Name, currentGame.Player.Password);

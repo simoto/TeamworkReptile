@@ -80,6 +80,12 @@
             this.renderer.RenderPlayerInfo(this.player);
         }
 
+        public void Exit()
+        {
+            SystemSounds.Beep.Play();
+            Environment.Exit(0);
+        }
+
         public void Move(Direction direction)
         {
             // TODO check if ref is still needed
@@ -114,7 +120,6 @@
             if (isSaved)
             {
                 SystemSounds.Asterisk.Play();
-                Environment.Exit(0);
             }
             else
             {

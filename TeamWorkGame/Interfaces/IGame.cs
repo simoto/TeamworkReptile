@@ -22,5 +22,7 @@ using TeamWorkGame.GameObjects;
         void RestartLevel();
 
         void StartNewGame();
+
+        void Exit();
     }
 }

@@ -8,13 +8,18 @@
     [Serializable]
     public class ConsoleRenderer : IRenderer
     {
-        private const string MenuSaveMessage = "S => Save and exit.";
-        private const string MenuLoadMessage = "L => Load previuos game.";
-        private const string MenuRestartMessage = "R => Restart level.";
-        private const string MenuNewGameMessage = "N => Start new game.";
-        private const string GameOverMessage = "GAME OVER";
-        private const int MenuRenderColumn = 20;
-        private const int GameOverMessageColumn = 20;
+        private const string MenuSaveLabel = "S => Save.";
+        private const string MenuLoadLabel = "L => Load previuos game.";
+        private const string MenuRestartLabel = "R => Restart level.";
+        private const string MenuNewGameLabel = "N => Start new game.";
+        private const string MenuGameOverLabel = "GAME OVER";
+        private const string MenuExitLabel = "E => EXIT";
+        private const int MenuRenderColumn = 28;
+        private const int MenuStartRow = 1;
+        private const int PlayerInfoRenderColumn = 12;
+        private const int PlayerInfoStartRow = 1;
+        private const int GameOverLabbelColumn = 12;
+        private const int GameOverLabbelRow = 7;
         private const ConsoleColor PlayerBackgroundColor = ConsoleColor.DarkRed;
         private const ConsoleColor PlayerColor = ConsoleColor.White;
         private const ConsoleColor UserNameColor = ConsoleColor.Blue;
@@ -22,7 +27,7 @@
         private const ConsoleColor LevelColor = ConsoleColor.Green;
         private const ConsoleColor BrickColor = ConsoleColor.DarkGray;
         private const ConsoleColor BackgroundColor = ConsoleColor.Black;
-        private const ConsoleColor GameOverMessageColor = ConsoleColor.Red;
+        private const ConsoleColor GameOverLabbelColor = ConsoleColor.Red;
         private const char SymbolOfPlayer = 'H';
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -64,39 +69,50 @@
 
         public void RenderInGameMenu()
         {
-            Console.SetCursorPosition(MenuRenderColumn, 2);
-            Console.WriteLine(MenuSaveMessage);
-            Console.SetCursorPosition(MenuRenderColumn, 4);
-            Console.WriteLine(MenuLoadMessage);
-            Console.SetCursorPosition(MenuRenderColumn, 6);
-            Console.WriteLine(MenuRestartMessage);
-            Console.SetCursorPosition(MenuRenderColumn, 8);
-            Console.WriteLine(MenuNewGameMessage);
+            int row = MenuStartRow;
+            Console.SetCursorPosition(MenuRenderColumn, row);
+            Console.Write(MenuSaveLabel);
+            row += 2;
+            Console.SetCursorPosition(MenuRenderColumn, row);
+            Console.Write(MenuLoadLabel);
+            row += 2;
+            Console.SetCursorPosition(MenuRenderColumn, row);
+            Console.Write(MenuRestartLabel);
+            row += 2;
+            Console.SetCursorPosition(MenuRenderColumn, row);
+            Console.Write(MenuNewGameLabel);
+            row += 2;
+            Console.SetCursorPosition(MenuRenderColumn, row);
+            Console.Write(MenuExitLabel);
         }
 
         public void RenderPlayerInfo(Player player)
         {
-            Console.SetCursorPosition(2, 12);
+            int row = PlayerInfoStartRow;
+            Console.SetCursorPosition(PlayerInfoRenderColumn, row);
             Console.ForegroundColor = UserNameColor;
             Console.Write("Moves: {0}", player.Name);
+            row += 2;
 
-            Console.SetCursorPosition(2, 14);
+            Console.SetCursorPosition(PlayerInfoRenderColumn, row);
             Console.ForegroundColor = LevelColor;
             Console.Write("Level: {0}", player.Level);
+            row += 2;
 
-            Console.SetCursorPosition(2, 16);
+            Console.SetCursorPosition(PlayerInfoRenderColumn, row);
             Console.ForegroundColor = MoovesColor;
             Console.Write("Moves: {0}", player.Moves);
         }
 
         public void RenderGameOver()
         {
-            Console.SetCursorPosition(GameOverMessageColumn, 10);
-            Console.ForegroundColor = GameOverMessageColor;
-            Console.WriteLine(GameOverMessage);
+            Console.SetCursorPosition(GameOverLabbelColumn, GameOverLabbelRow);
+            Console.ForegroundColor = GameOverLabbelColor;
+            Console.Write(MenuGameOverLabel);
+            this.RenderRanking();
         }
 
-        public void RenderRanking()
+        private void RenderRanking()
         {
             throw new NotImplementedException();
         }

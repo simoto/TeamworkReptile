@@ -8,8 +8,8 @@
 
     internal class Start
     {
-        private const int Height = 20;
-        private const int Width = 50;
+        private const int Height = 30;
+        private const int Width = 55;
         private const string Title = "ReptileMovingBox";
         private static IRenderer renderer;
         private static Player player;
